@@ -1,0 +1,145 @@
+@import url("https://fonts.googleapis.com/css?family=Playfair+Display:900|Raleway:400,700");
+body {
+  font-family: 'Raleway', sans-serif;
+  background-color: #FFFFFF; }
+
+h1 {
+  font-family: 'Playfair Display', serif; }
+
+header {
+  background-color: #1F1F24; }
+
+nav {
+  background-color: #FFFFFF;
+  color: #1F1F24;
+  font-weight: bold; }
+
+section {
+  margin: 50px 0; }
+
+footer {
+  background-color: #1F1F24;
+  color: #FFFFFF;
+  min-height: 80px; }
+
+.footer-title {
+  color: #D2C2B0;
+  font-size: 0.9em; }
+
+.title-name {
+  color: #FFFFFF;
+  font-weight: bold; }
+
+.header-top {
+  background-color: #1F1F24;
+  color: #D2C2B0;
+  min-height: 80px; }
+
+.header-bottom {
+  border-radius: 2px 2px 0 0; }
+
+.header-account-text, .footer-title, .footer-links, .newsletter-blurb {
+  font-size: 0.6em;
+  font-weight: bold;
+  margin: 5px 10px; }
+
+.nav-list {
+  margin: 10px 0 5px;
+  font-size: 0.8em; }
+
+.nav-item {
+  margin: auto; }
+
+.product-image {
+  padding: 1px 10px 1px 1px; }
+
+.product-image-display {
+  min-height: 400px; }
+
+.product-image-chooser {
+  min-height: 100px; }
+
+.product-info {
+  min-height: 500px; }
+
+.product-select {
+  position: relative;
+  min-width: 100px;
+  width: 100px;
+  margin: 0 auto;
+  padding: 5px;
+  background: #fff;
+  border-radius: 7px;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  box-shadow: 0 1px 1px rgba(50, 50, 50, 0.1);
+  cursor: pointer;
+  outline: none;
+  font-weight: bold;
+  color: #1F1F24; }
+
+.button-add-to-bag {
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  cursor: pointer;
+  outline: none;
+  font-weight: bold;
+  color: #FFFFFF;
+  background: #1F1F24; }
+
+.product-dropdowns {
+  padding: 15px; }
+
+.product-section {
+  margin: 15px; }
+
+.product-description {
+  margin-bottom: 0; }
+
+.product-bolded {
+  font-weight: bold;
+  margin-bottom: 5px; }
+
+.product-designer {
+  font-weight: bold;
+  font-size: 0.8em; }
+
+.product-title {
+  font-weight: bold; }
+
+.product-price {
+  font-weight: bold;
+  color: #D2C2B0; }
+
+.related-text {
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%); }
+
+.related-title {
+  font-weight: bold;
+  padding-bottom: 20px; }
+
+.related-bold {
+  font-weight: bold;
+  font-size: 1.1em; }
+
+.gold-dash {
+  color: #D2C2B0; }
+
+.newsletter-blurb {
+  font-weight: 400; }
+
+.input-email {
+  background-color: #1F1F24;
+  color: #FFFFFF;
+  height: 30px;
+  font-size: 0.8em;
+  padding-left: 5px;
+  margin-left: 10px; }
+
+.button-email {
+  color: #FFFFFF;
+  background-color: #1F1F24;
+  height: 30px; }
+
+.footer-social-link {
+  font-size: 1.5em; }

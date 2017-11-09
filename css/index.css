@@ -1,0 +1,72 @@
+@import url("https://fonts.googleapis.com/css?family=Playfair+Display:900|Raleway:400,700");
+body {
+  font-family: 'Raleway', sans-serif; }
+
+h1 {
+  font-family: 'Playfair Display', serif; }
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+a:hover {
+  text-decoration: none;
+  color: inherit;
+}
+
+a:active {
+  text-decoration: none;
+  color: inherit;
+}
+
+a:visited {
+  text-decoration: none;
+  color: inherit;
+}
+
+.landing-quarter {
+  min-height: 25%; }
+
+.landing-sixth {
+  min-height: 16%; }
+
+.landing-logo {
+  padding: 25px 15px;
+  font-weight: bold; }
+
+.landing-header {
+  padding: 0 15% 5%; }
+
+.landing-desc {
+  padding: 5% 15%;
+  font-size: .75em;
+  color: #888888; }
+
+.landing-more {
+  padding: 5% 15%;
+  font-weight: bold;
+  color: #333333;
+  letter-spacing: 0.1em;
+  font-size: 0.8em; }
+
+.landing-counter {
+  padding: 5% 15%;
+  margin: auto;
+  color: #888888; }
+
+.landing-left {
+  background: transparent; }
+
+.landing-right {
+  background: url("https://i.pinimg.com/736x/01/0e/83/010e834c59ee3d7e6afa806e47a1c189--fashion-makeup-photography-fashion-portraits.jpg");
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover; }
+
+.carousel-number {
+  padding-right: 25px; }
+
+.heading {
+  height: 500px; }
