@@ -35,7 +35,7 @@ nav {
 }
 
 section {
-  margin: 50px 0;
+  margin: 75px 0;
 }
 
 footer {
@@ -50,12 +50,19 @@ footer {
   font-size: 0.9em;
 }
 
+.footer-col {
+  margin: 20px;
+}
+
 .footer-links {
   @extend .header-account-text;
+  padding: 5px 5px 50px;
 }
 
 .newsletter-blurb {
   @extend .header-account-text;
+  padding: 5px;
+  font-weight: normal;
 }
 
 .title-name {
@@ -79,6 +86,11 @@ footer {
   margin: 5px 10px;
 }
 
+.nav-div {
+  position: relative;
+  cursor: pointer;
+}
+
 .nav-list {
   margin: 10px 0 5px;
   font-size: 0.8em;
@@ -86,6 +98,17 @@ footer {
 
 .nav-item {
   margin: auto;
+}
+
+.interior-nav-title {
+  font-size: 0.8em;
+  font-weight: bold;
+}
+
+.interior-nav-item {
+  font-size: 0.7em;
+  font-weight: bold;
+  margin-left: 5px;
 }
 
 .product-image {
@@ -98,6 +121,7 @@ footer {
 
 .product-image-chooser {
   min-height: 100px;
+  padding: 10px;
 }
 
 .product-info {
@@ -180,9 +204,7 @@ footer {
   color: $feature;
 }
 
-.newsletter-blurb {
-  font-weight: 400;
-}
+
 
 .input-email {
   background-color: $dkblue;

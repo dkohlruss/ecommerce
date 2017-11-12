@@ -15,7 +15,7 @@ nav {
   font-weight: bold; }
 
 section {
-  margin: 50px 0; }
+  margin: 75px 0; }
 
 footer {
   background-color: #1F1F24;
@@ -25,6 +25,16 @@ footer {
 .footer-title {
   color: #D2C2B0;
   font-size: 0.9em; }
+
+.footer-col {
+  margin: 20px; }
+
+.footer-links {
+  padding: 5px 5px 50px; }
+
+.newsletter-blurb {
+  padding: 5px;
+  font-weight: normal; }
 
 .title-name {
   color: #FFFFFF;
@@ -43,12 +53,25 @@ footer {
   font-weight: bold;
   margin: 5px 10px; }
 
+.nav-div {
+  position: relative;
+  cursor: pointer; }
+
 .nav-list {
   margin: 10px 0 5px;
   font-size: 0.8em; }
 
 .nav-item {
   margin: auto; }
+
+.interior-nav-title {
+  font-size: 0.8em;
+  font-weight: bold; }
+
+.interior-nav-item {
+  font-size: 0.7em;
+  font-weight: bold;
+  margin-left: 5px; }
 
 .product-image {
   padding: 1px 10px 1px 1px; }
@@ -57,7 +80,8 @@ footer {
   min-height: 400px; }
 
 .product-image-chooser {
-  min-height: 100px; }
+  min-height: 100px;
+  padding: 10px; }
 
 .product-info {
   min-height: 500px; }
@@ -124,9 +148,6 @@ footer {
 
 .gold-dash {
   color: #D2C2B0; }
-
-.newsletter-blurb {
-  font-weight: 400; }
 
 .input-email {
   background-color: #1F1F24;
