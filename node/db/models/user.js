@@ -20,17 +20,18 @@ let UserSchema = new mongoose.Schema({
     type: Number,
     required: false,
     default: 0
-  },
-  tokens: [{
-    access: {
-      type: String,
-      required: true
-    },
-    token: {
-      type: String,
-      required: true
-    }
-  }]
+  }
+  // ,
+  // tokens: [{
+  //   access: {
+  //     type: String,
+  //     required: true
+  //   },
+  //   token: {
+  //     type: String,
+  //     required: true
+  //   }
+  // }]
 });
 
 // Instance methods (small u user)

@@ -26,7 +26,8 @@ const app = express();
 app.use(bodyParser.json());
 
 app.get('/', (req, res) => {
-  res.send('Main entrypoint (never used)');
+  console.log(res.format);
+  res.status(200).send('Main entrypoint (never used)');
 });
 
 // USER PATHS FOR LOGIN/REGISTRATION
@@ -37,8 +38,15 @@ app.get('/user/', (req, res) => {
 
 app.get('/user/:id', (req, res) => {
   let user = req.params.id;
-  res.send(`Placeholder get path for ${user}`);
+  res.send(`Placeholder get path for ${user}; unlikely to be used`);
 })
+
+app.post('/user/login/', (req, res) => {
+  // Placeholder for login
+  let body = _.pick(req.body, ['email', 'password']);
+
+  res.send(body);
+});
 
 app.post('/user/register/', (req, res) => {
   let body = _.pick(req.body, ['username', 'password']);
@@ -47,6 +55,12 @@ app.post('/user/register/', (req, res) => {
 
   user.save().then(() => {
     res.send(user);
+  }).catch((err) => {
+    if (err.name === 'ValidationError') {
+      res.status(409).send();
+    }
+    
+    res.status(400).send();
   });
 });
 
@@ -62,15 +76,13 @@ app.get('/api/', (req, res) => {
               }
     }
   ]).then((result) => {
-    console.log(result);
     res.send(result);
   });
 });
 
 app.get('/api/:name', (req, res) => {
   // Picks off all info from specific item
-  let name = req.params.name;
-  let params = {name};
+  let params = {name: req.params.name};
 
   Product.find(params).then((products) => {
     res.send(products);
@@ -80,6 +92,8 @@ app.get('/api/:name', (req, res) => {
 });
 
 app.post('/api/new', (req, res) => {
+  // Adds a new item with parameters from form
+  // Should require user auth and admin status (TODO)
   let body = _.pick(req.body, ['name', 'designer', 'category', 'price', 'description', 'size', 'color', 'stock']);
 
   let product = new Product(body);
@@ -90,4 +104,9 @@ app.post('/api/new', (req, res) => {
 
 app.listen(3000, () => {
   console.log('Server started on port 3000');
-})
+});
+
+// Export app for testing
+module.exports = {
+  app
+};
