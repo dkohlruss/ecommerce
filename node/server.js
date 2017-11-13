@@ -54,14 +54,21 @@ app.post('/user/register/', (req, res) => {
 // AND ADMINS (ADDING/MODIFYING PRODUCTS)
 
 app.get('/api/', (req, res) => {
-  Product.distinct('name').then((products) => {
-    res.send(products);
-  }).catch((err) => {
-    res.send(err);
+  // Picks off items (grouped by name), and the price, for listing on mosaic
+  Product.aggregate([
+    { $group: {
+                _id: "$name",
+                price: { $first: "$price" }
+              }
+    }
+  ]).then((result) => {
+    console.log(result);
+    res.send(result);
   });
 });
 
 app.get('/api/:name', (req, res) => {
+  // Picks off all info from specific item
   let name = req.params.name;
   let params = {name};
 
