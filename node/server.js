@@ -26,7 +26,6 @@ const app = express();
 app.use(bodyParser.json());
 
 app.get('/', (req, res) => {
-  console.log(res.format);
   res.status(200).send('Main entrypoint (never used)');
 });
 
@@ -59,7 +58,7 @@ app.post('/user/register/', (req, res) => {
     if (err.name === 'ValidationError') {
       res.status(409).send();
     }
-    
+
     res.status(400).send();
   });
 });
@@ -99,6 +98,8 @@ app.post('/api/new', (req, res) => {
   let product = new Product(body);
   product.save().then(() => {
     res.send(product);
+  }).catch((err) => {
+    res.status(400).send();
   });
 });
 
