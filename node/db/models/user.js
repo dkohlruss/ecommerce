@@ -18,7 +18,8 @@ let UserSchema = new mongoose.Schema({
   },
   level: {
     type: Number,
-    required: false
+    required: false,
+    default: 0
   },
   tokens: [{
     access: {
@@ -52,7 +53,7 @@ UserSchema.methods.toJSON = function() {
   let user = this;
   let userObject = user.toObject();
 
-  return _.pick(userObject, ['_id', 'username']);
+  return _.pick(userObject, ['_id', 'username', 'level']);
 };
 
 UserSchema.methods.removeToken = function(token) {
