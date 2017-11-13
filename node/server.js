@@ -84,9 +84,13 @@ app.get('/api/:name', (req, res) => {
   let params = {name: req.params.name};
 
   Product.find(params).then((products) => {
-    res.send(products);
+    if (products.length === 0) {
+      res.status(404).send();
+    } else {
+      res.send(products);
+    }
   }).catch((err) => {
-    res.send(err);
+    res.status(400).send();
   });
 });
 

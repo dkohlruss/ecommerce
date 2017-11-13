@@ -18,6 +18,23 @@ const users = [{
   level: 1
 }];
 
+const products = [{
+  name: 'Seeded Product',
+  designer: 'Seed Designer',
+  category: 'Seed Category',
+  price: '55.99',
+  description: 'Seed Description'
+},
+{
+  name: 'Seeded Product 2',
+  designer: 'Seed Designer',
+  category: 'Seed Category',
+  price: '55.99',
+  description: 'Seed Description',
+  size: 'Large',
+  color: 'Black'
+}];
+
 const populateUsers = ((done) => {
   User.remove({}, (err) => {
     if (err) {
@@ -30,20 +47,16 @@ const populateUsers = ((done) => {
   });
 });
 
+
+
 const populateProducts = ((done) => {
-  const product = {
-    name: 'Seeded Product',
-    designer: 'Seed Designer',
-    category: 'Seed Category',
-    price: '55.99',
-    description: 'Seed Description'
-  }
   Product.remove({}, (err) => {
     if (err) {
       done(err);
     }
 
-    let productOne = new Product(product).save();
+    let productOne = new Product(products[0]).save();
+    let productTwo = new Product(products[1]).save();
 
     done();
   });
@@ -52,18 +65,73 @@ const populateProducts = ((done) => {
 beforeEach(populateUsers);
 beforeEach(populateProducts);
 
-describe('GET /', function() {
-  it('should return a valid document', function(done) {
-    request(app)
-      .get('/')
-      .expect(200)
-      .end((err, res) => {
-        if (err) {
-          return done(err);
-        }
+describe('GET', function() {
+  describe('/', function() {
+    it ('should return a valid document', function(done) {
+      request(app)
+        .get('/')
+        .expect(200)
+        .end((err, res) => {
+          if (err) {
+            return done(err);
+          }
 
-        done();
-      })
+          done();
+        })
+    });
+  });
+
+  describe('/api', function() {
+    it ('should return product names and prices', function(done) {
+      request(app)
+        .get('/api')
+        .expect(200)
+        .expect((res) => {
+          expect(res.body.length).toBeGreaterThan(0);
+          expect(res.body[0]._id).toContain(products[0].name);
+          expect(res.body[0].price).toContain(products[0].price);
+          expect(res.body[0]._id).toBeTruthy();
+          expect(res.body[0].price).toBeTruthy();
+        })
+        .end(done);
+    });
+  });
+
+  describe('/api/:name', function() {
+    it ('should return the product information', function(done) {
+      request(app)
+        .get(`/api/${products[0].name}`)
+        .expect(200)
+        .expect((res) => {
+          expect(res.body.length).toBeGreaterThan(0);
+          expect(res.body[0].name).toEqual(products[0].name);
+          expect(res.body[0].designer).toEqual(products[0].designer);
+          expect(res.body[0].category).toEqual(products[0].category);
+          expect(res.body[0].price).toEqual(products[0].price);
+          expect(res.body[0].description).toEqual(products[0].description);
+          expect(res.body[0].stock).toEqual(0);
+        })
+        .end(done);
+    });
+
+    it ('should include optional product information', function(done) {
+      request(app)
+        .get(`/api/${products[1].name}`)
+        .expect(200)
+        .expect((res) => {
+          expect(res.body[0].color).toEqual(products[1].color);
+          expect(res.body[0].size).toEqual(products[1].size);
+        })
+        .end(done);
+    });
+
+    it ('should not return a non-existant product', function(done) {
+      let name = 'Nonexistant Product';
+      request(app)
+        .get(`/api/${name}`)
+        .expect(404)
+        .end(done);
+    });
   });
 });
 
