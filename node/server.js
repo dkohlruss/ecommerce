@@ -29,11 +29,18 @@ app.get('/', (req, res) => {
   res.send('Main entrypoint (never used)');
 });
 
+// USER PATHS FOR LOGIN/REGISTRATION
+
 app.get('/user/', (req, res) => {
   res.send('User API');
 });
 
-app.post('/user/', (req, res) => {
+app.get('/user/:id', (req, res) => {
+  let user = req.params.id;
+  res.send(`Placeholder get path for ${user}`);
+})
+
+app.post('/user/register/', (req, res) => {
   let body = _.pick(req.body, ['username', 'password']);
 
   let user = new User(body);
@@ -43,8 +50,35 @@ app.post('/user/', (req, res) => {
   });
 });
 
+// PATHS FOR QUERYING DB FROM END-USER (FOR BROWSING)
+// AND ADMINS (ADDING/MODIFYING PRODUCTS)
+
 app.get('/api/', (req, res) => {
-  res.send('Content API');
+  Product.distinct('name').then((products) => {
+    res.send(products);
+  }).catch((err) => {
+    res.send(err);
+  });
+});
+
+app.get('/api/:name', (req, res) => {
+  let name = req.params.name;
+  let params = {name};
+
+  Product.find(params).then((products) => {
+    res.send(products);
+  }).catch((err) => {
+    res.send(err);
+  });
+});
+
+app.post('/api/new', (req, res) => {
+  let body = _.pick(req.body, ['name', 'designer', 'category', 'price', 'description', 'size', 'color', 'stock']);
+
+  let product = new Product(body);
+  product.save().then(() => {
+    res.send(product);
+  });
 });
 
 app.listen(3000, () => {
