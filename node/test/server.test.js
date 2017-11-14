@@ -47,8 +47,6 @@ const populateUsers = ((done) => {
   });
 });
 
-
-
 const populateProducts = ((done) => {
   Product.remove({}, (err) => {
     if (err) {

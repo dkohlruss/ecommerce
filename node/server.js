@@ -111,7 +111,7 @@ app.listen(3000, () => {
   console.log('Server started on port 3000');
 });
 
-// Export app for testing
+// Exporting app for testing purposes
 module.exports = {
   app
 };
