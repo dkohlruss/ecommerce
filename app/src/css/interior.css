@@ -1,0 +1,234 @@
+@import url('https://fonts.googleapis.com/css?family=Playfair+Display:900|Raleway:400,700');
+body {
+	font-family: 'Raleway', sans-serif;
+	background-color: #ffffff;
+}
+
+a {
+	color: #1f1f24;
+	text-decoration: none;
+}
+
+a:hover {
+	color: #d2c2b0;
+	text-decoration: none;
+}
+
+a:visited {
+	color: #1f1f24;
+}
+
+a:active {
+	color: #1f1f24;
+}
+
+h1 {
+	font-family: 'Playfair Display', serif;
+}
+
+header {
+	background-color: #1f1f24;
+}
+
+nav {
+	background-color: #ffffff;
+	color: #1f1f24;
+	font-weight: bold;
+}
+
+section {
+	margin: 75px 0;
+}
+
+footer {
+	background-color: #1f1f24;
+	color: #ffffff;
+	min-height: 80px;
+}
+
+.footer-title {
+	color: #d2c2b0;
+	font-size: 0.9em;
+}
+
+.footer-col {
+	margin: 20px;
+}
+
+.footer-links {
+	padding: 5px 5px 50px;
+}
+
+.newsletter-blurb {
+	padding: 5px;
+	font-weight: normal;
+}
+
+.title-name {
+	color: #ffffff;
+	font-weight: bold;
+}
+
+.header-top {
+	background-color: #1f1f24;
+	color: #d2c2b0;
+	min-height: 80px;
+}
+
+.header-bottom {
+	margin-bottom: 50px;
+}
+
+.header-account-text,
+.footer-title,
+.footer-links,
+.newsletter-blurb {
+	font-size: 0.6em;
+	font-weight: bold;
+	margin: 5px 10px;
+}
+
+.nav-div {
+	position: relative;
+	cursor: pointer;
+}
+
+.nav-list {
+	margin: 10px 0 5px;
+	font-size: 0.8em;
+}
+
+.nav-item {
+	margin: auto;
+	border-bottom: 2px solid transparent;
+	transition-property: border;
+	transition-duration: 0.25s;
+}
+
+.nav-item:hover {
+	border-bottom: 2px solid #1f1f24;
+}
+
+.interior-nav-title {
+	font-size: 0.8em;
+	font-weight: bold;
+}
+
+.interior-nav-item {
+	font-size: 0.7em;
+	font-weight: bold;
+	margin-left: 5px;
+}
+
+.product-image {
+	padding: 1px 10px 1px 1px;
+}
+
+.product-image-display {
+	min-height: 400px;
+}
+
+.product-image-chooser {
+	min-height: 100px;
+	padding: 10px;
+}
+
+.product-info {
+	min-height: 500px;
+}
+
+.product-select {
+	position: relative;
+	min-width: 100px;
+	width: 100px;
+	margin: 0 auto;
+	padding: 5px;
+	background: #fff;
+	border-radius: 7px;
+	border: 1px solid rgba(0, 0, 0, 0.15);
+	box-shadow: 0 1px 1px rgba(50, 50, 50, 0.1);
+	cursor: pointer;
+	outline: none;
+	font-weight: bold;
+	color: #1f1f24;
+}
+
+.button-add-to-bag {
+	border: 1px solid rgba(0, 0, 0, 0.15);
+	cursor: pointer;
+	outline: none;
+	font-weight: bold;
+	color: #ffffff;
+	background: #1f1f24;
+}
+
+.product-dropdowns {
+	padding: 15px;
+}
+
+.product-section {
+	margin: 15px;
+}
+
+.product-description {
+	margin-bottom: 0;
+}
+
+.product-bolded {
+	font-weight: bold;
+	margin-bottom: 5px;
+}
+
+.product-designer {
+	font-weight: bold;
+	font-size: 0.8em;
+}
+
+.product-title {
+	font-weight: bold;
+}
+
+.product-price {
+	font-weight: bold;
+	color: #d2c2b0;
+}
+
+.related-text {
+	position: relative;
+	top: 50%;
+	transform: translateY(-50%);
+}
+
+.related-title {
+	font-weight: bold;
+	padding-bottom: 20px;
+}
+
+.related-bold {
+	font-weight: bold;
+	font-size: 1.1em;
+}
+
+.gold-dash {
+	color: #d2c2b0;
+}
+
+.input-email {
+	background-color: #1f1f24;
+	color: #ffffff;
+	height: 30px;
+	font-size: 0.8em;
+	padding-left: 5px;
+	margin-left: 10px;
+	width: 200px;
+}
+
+.button-email {
+	color: #ffffff;
+	background-color: #1f1f24;
+	height: 30px;
+}
+
+.footer-social-link {
+	font-size: 1.5em;
+}
