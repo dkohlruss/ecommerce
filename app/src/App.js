@@ -5,11 +5,11 @@ import { createStore, applyMiddleware } from 'redux';
 
 import Header from './components/header';
 import Footer from './components/footer';
-import Sidebar from './components/sidebar';
+import Sidebar from './containers/sidebar';
 
 import LandingPage from './components/landing_page';
-import ProductPage from './components/product_page';
-import ProductsPage from './components/products_page';
+import ProductPage from './containers/product_page';
+import ProductsPage from './containers/products_page';
 import AdminPage from './components/admin_page';
 import CartPage from './components/cart_page';
 

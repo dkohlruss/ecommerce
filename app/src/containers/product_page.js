@@ -3,11 +3,17 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { fetchProduct } from '../actions';
 
+import ProductSizes from '../components/product_sizes';
+import ProductButton from '../components/product_button';
+
 class ProductPage extends Component {
 	constructor(props) {
 		super(props);
 
-		this.state = { size: null };
+		this.state = {
+			selectedSize: null,
+			selectedStock: null
+		};
 	}
 
 	componentDidMount() {
@@ -20,49 +26,26 @@ class ProductPage extends Component {
 		let { productName } = nextProps.match.params;
 		if (oldName !== productName) {
 			this.props.fetchProduct(productName);
+			this.setState({
+				selectedSize: null,
+				selectedStock: null
+			});
 		}
 	}
 
-	getSizes() {
+	handleSizeChange(size) {
 		let products = this.props.product;
-		let sizes = products.map(product => {
-			return product.size;
+		products = products.map(product => {
+			if (product.size === size || !product.size) {
+				this.setState({
+					selectedSize: size,
+					selectedStock: product.stock
+				});
+			}
 		});
-
-		console.log(sizes);
-
-		return (
-			<select
-				name="size"
-				className="product-select product-size-select"
-				defaultValue="size"
-				onChange={event => {
-					this.getQty(event.target.value);
-				}}
-			>
-				<option key="defaultSize" value="size" disabled>
-					Size
-				</option>
-				{sizes.map(size => {
-					if (!size) {
-						return null;
-					}
-					return (
-						<option key={size} value={size}>
-							{size}
-						</option>
-					);
-				})}
-			</select>
-		);
-	}
-
-	getQty(size) {
-		console.log(size);
 	}
 
 	render() {
-		console.log(this.state);
 		return !this.props.product ? (
 			<span />
 		) : (
@@ -103,32 +86,17 @@ class ProductPage extends Component {
 							</span>
 							<p className="product-price">{this.props.product[0].price}</p>
 						</div>
-						<div className="col-12 text-center product-dropdowns">
-							<div className="row">
-								<div className="col-6">{this.getSizes()}</div>
-								<div className="col-6">
-									<select
-										name="qty"
-										className="product-select product-qty-select"
-										defaultValue="qty"
-									>
-										<option value="qty" disabled>
-											Qty
-										</option>
-										<option value="1">1</option>
-										<option value="2">2</option>
-										<option value="3">3</option>
-										<option value="4">4</option>
-										<option value="5">5</option>
-									</select>
-								</div>
-							</div>
-						</div>
-						<div className="col-12 product-section">
-							<button className="btn btn-block button-add-to-bag">
-								ADD TO BAG
-							</button>
-						</div>
+
+						<ProductSizes
+							products={this.props.product}
+							handleChange={this.handleSizeChange.bind(this)}
+						/>
+
+						<ProductButton
+							stock={this.state.selectedStock}
+							size={this.state.selectedSize}
+						/>
+
 						<div className="col-12 product-section">
 							<span className="product-bolded">PRODUCT DETAILS</span>
 							<p className="product-description">
