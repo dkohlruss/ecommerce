@@ -46,8 +46,9 @@ class ProductPage extends Component {
 									<select
 										name="size"
 										className="product-select product-size-select"
+										defaultValue="size"
 									>
-										<option value="size" selected disabled>
+										<option value="size" disabled>
 											Size
 										</option>
 										<option value="8">8</option>
@@ -60,8 +61,9 @@ class ProductPage extends Component {
 									<select
 										name="qty"
 										className="product-select product-qty-select"
+										defaultValue="qty"
 									>
-										<option value="qty" selected>
+										<option value="qty" disabled>
 											Qty
 										</option>
 										<option value="1">1</option>

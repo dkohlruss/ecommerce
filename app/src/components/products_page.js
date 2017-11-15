@@ -34,7 +34,6 @@ class ProductsPage extends Component {
 		}
 	}
 
-	// TODO: CREATE DUMB COMPONENT THAT RECEIVES PRODUCT INFO, SORTBY...
 	renderProducts(category) {
 		let { products } = this.props;
 
@@ -47,9 +46,12 @@ class ProductsPage extends Component {
 						key={`${product._id}detail`}
 						className="col-lg-4 col-md-6 text-center product-mosaic-detail"
 					>
-						<img src="http://via.placeholder.com/200x200" alt="Placeholder" />{' '}
+						<Link to={`/main/products/product/${product._id}`}>
+							<img src="http://via.placeholder.com/200x200" alt="Placeholder" />
+							<br />
+							<span className="product-mosaic-title">{product._id}</span>
+						</Link>{' '}
 						<br />
-						<span className="product-mosaic-title">{product._id}</span> <br />
 						<span className="gold-dash">-</span>
 						<br />
 						{product.price}
@@ -59,8 +61,9 @@ class ProductsPage extends Component {
 		});
 	}
 
-	sortProducts(command) {
-		this.setState({ sortBy: command });
+	sortProducts(value) {
+		console.log(value);
+		this.setState({ sortBy: value });
 	}
 
 	render() {
@@ -70,8 +73,21 @@ class ProductsPage extends Component {
 			<div className="col-10 product-mosaic">
 				<div className="row">
 					<div className="col-12">
-						<button onClick={() => this.sortProducts('Name AZ')}>A-Z</button>
-						<button onClick={() => this.sortProducts('Name ZA')}>Z-A</button>
+						<select
+							name="filter"
+							className="product-select"
+							defaultValue=""
+							onChange={event => this.sortProducts(event.target.value)}
+						>
+							<option value="filter" disabled>
+								Filter By...
+							</option>
+							<option value="none">None</option>
+							<option value="Name AZ">Name: A-Z</option>
+							<option value="Name ZA">Name: Z-A</option>
+							<option value="Price Asc">Price: High to Low</option>
+							<option value="Price Desc">Price: Low to High</option>
+						</select>
 					</div>
 					<div className="col-12 text-center">
 						<h2>{category ? _.capitalize(category) : 'Some Items We Like'}</h2>
