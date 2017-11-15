@@ -72,7 +72,7 @@ class ProductsPage extends Component {
 		return (
 			<div className="col-10 product-mosaic">
 				<div className="row">
-					<div className="col-12">
+					<div className="col-12 text-right">
 						<select
 							name="filter"
 							className="product-select"

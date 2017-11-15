@@ -1,6 +1,6 @@
 export default function(state = null, action) {
 	switch (action.type) {
-		case 'FETCH_POSTS':
+		case 'FETCH_PRODUCT':
 			return action.payload.data;
 		default:
 			return state;

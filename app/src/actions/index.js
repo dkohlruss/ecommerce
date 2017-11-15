@@ -9,11 +9,11 @@ export function fetchPosts() {
 	};
 }
 
-export function fetchCategory(category) {
-	const request = axios.get(`http://localhost:3001/api/${category}`);
+export function fetchProduct(name) {
+	const request = axios.get(`http://localhost:3001/api/product/${name}`);
 
 	return {
-		type: 'FETCH_CATEGORY',
+		type: 'FETCH_PRODUCT',
 		payload: request
 	};
 }

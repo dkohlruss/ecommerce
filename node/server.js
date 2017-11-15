@@ -95,17 +95,28 @@ app.get('/api/product/:name', (req, res) => {
 	// Picks off all info from specific item
 	let params = { name: req.params.name };
 
-	Product.find(params)
-		.then(products => {
-			if (products.length === 0) {
-				res.status(404).send();
-			} else {
-				res.send(products);
-			}
-		})
-		.catch(err => {
-			res.status(400).send();
-		});
+	console.log(params);
+
+	Product.aggregate([
+		{
+			$match: params
+		}
+	]).then(result => {
+		console.log(result);
+		res.send(result);
+	});
+
+	// Product.find(params)
+	// 	.then(products => {
+	// 		if (products.length === 0) {
+	// 			res.status(404).send();
+	// 		} else {
+	// 			res.send(products);
+	// 		}
+	// 	})
+	// 	.catch(err => {
+	// 		res.status(400).send();
+	// 	});
 });
 
 app.post('/api/new', (req, res) => {
