@@ -41,16 +41,16 @@ class Header extends Component {
 											<Link to={'/main/products'}>HOME</Link>
 										</li>
 										<li className="list-inline-item nav-item" id="accessories">
-											<Link to={'/main/products/think'}>ACCESSORIES</Link>
+											<Link to={'/main/products/accessories'}>ACCESSORIES</Link>
 										</li>
 										<li className="list-inline-item nav-item" id="tops">
-											<Link to={'/main/products'}>TOPS</Link>
+											<Link to={'/main/products/tops'}>TOPS</Link>
 										</li>
 										<li className="list-inline-item nav-item" id="bottoms">
-											<Link to={'/main/products'}>BOTTOMS</Link>
+											<Link to={'/main/products/bottoms'}>BOTTOMS</Link>
 										</li>
 										<li className="list-inline-item nav-item" id="boots">
-											<Link to={'/main/products'}>BOOTS</Link>
+											<Link to={'/main/products/boots'}>BOOTS</Link>
 										</li>
 									</ul>
 								</div>

@@ -9,17 +9,17 @@ a {
 	text-decoration: none;
 }
 
-a:hover {
-	color: #d2c2b0;
-	text-decoration: none;
-}
-
 a:visited {
 	color: #1f1f24;
 }
 
 a:active {
 	color: #1f1f24;
+}
+
+a:hover {
+	color: #d2c2b0;
+	text-decoration: none;
 }
 
 h1 {
@@ -120,6 +120,20 @@ footer {
 	margin-left: 5px;
 }
 
+.product-mosaic {
+	padding-bottom: 50px;
+	min-height: 65vh;
+}
+
+.product-mosaic-detail {
+	padding-bottom: 25px;
+}
+
+.product-mosaic-title {
+	font-weight: bold;
+	font-size: 0.9em;
+}
+
 .product-image {
 	padding: 1px 10px 1px 1px;
 }
@@ -210,6 +224,7 @@ footer {
 }
 
 .gold-dash {
+	font-weight: bold;
 	color: #d2c2b0;
 }
 

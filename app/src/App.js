@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 import { createStore, applyMiddleware } from 'redux';
 // import reducers from './reducers';
-import { Provider } from 'react-redux';
-import ReduxPromise from 'redux-promise';
 
 import Header from './components/header';
 import Footer from './components/footer';
@@ -35,7 +33,12 @@ class App extends Component {
 							<Route exact path="/main/products" component={ProductsPage} />
 							<Route
 								exact
-								path="/main/products/:productName"
+								path="/main/products/:category"
+								component={ProductsPage}
+							/>
+							<Route
+								exact
+								path="/main/products/product/:productName"
 								component={ProductPage}
 							/>
 						</div>

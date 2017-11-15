@@ -1,36 +1,60 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { fetchPosts } from '../actions';
+import _ from 'lodash';
 
 import '../css/interior.css';
 
 class Sidebar extends Component {
+	componentDidMount() {
+		this.props.fetchPosts();
+	}
+
+	renderNav() {
+		let products = this.props.products;
+		let navObject = {};
+		let categories = [];
+
+		// Separates products into unique categories
+		products.forEach(product => {
+			if (!navObject[product.category]) {
+				navObject[product.category] = [];
+			}
+
+			navObject[product.category].push(product._id);
+			if (categories.indexOf(product.category) < 0) {
+				categories.push(product.category);
+			}
+		});
+
+		return categories.map(category => {
+			return (
+				<ul className="list-unstyled interior-nav-title" key={category}>
+					{category}
+					{navObject[category].map(product => {
+						return (
+							<li className="interior-nav-item" key={product}>
+								<Link to={`/main/products/product/${product}`}>{product}</Link>
+							</li>
+						);
+					})}
+				</ul>
+			);
+		});
+	}
+
 	render() {
 		return (
-			<div class="col-sm-2">
-				<ul class="list-unstyled interior-nav-title">
-					INTERIOR NAV
-					<li class="interior-nav-item">Sample 1</li>
-					<li class="interior-nav-item">Sample 2</li>
-					<li class="interior-nav-item">Sample 3</li>
-				</ul>
-
-				<ul class="list-unstyled interior-nav-title">
-					INTERIOR NAV
-					<li class="interior-nav-item">Sample 1</li>
-					<li class="interior-nav-item">Sample 2</li>
-					<li class="interior-nav-item">Sample 3</li>
-				</ul>
-
-				<ul class="list-unstyled interior-nav-title">
-					INTERIOR NAV
-					<li class="interior-nav-item">Sample 1</li>
-					<li class="interior-nav-item">Sample 2</li>
-					<li class="interior-nav-item">Sample 3</li>
-				</ul>
+			<div className="col-sm-2">
+				{this.props.products ? this.renderNav() : <span>Loading..</span>}
 			</div>
 		);
 	}
 }
 
-export default Sidebar;
+function mapStateToProps(state) {
+	return { products: state.products };
+}
+
+export default connect(mapStateToProps, { fetchPosts })(Sidebar);
