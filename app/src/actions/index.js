@@ -17,3 +17,21 @@ export function fetchProduct(name) {
 		payload: request
 	};
 }
+
+export function addCart(item) {
+	const request = axios.post(`http://localhost:3001/user/cart`, { item });
+
+	return {
+		type: 'ADD_CART',
+		payload: request
+	};
+}
+
+export function fetchCart() {
+	const request = axios.get(`http://localhost:3001/user/cart`);
+
+	return {
+		type: 'FETCH_CART',
+		payload: request
+	};
+}

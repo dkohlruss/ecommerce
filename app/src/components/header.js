@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
+import CartPreview from '../containers/header_cart_preview';
+
 import '../css/interior.css';
 
 class Header extends Component {
@@ -23,7 +25,7 @@ class Header extends Component {
 								<span className="header-account-text" onClick={this.login}>
 									LOGIN
 								</span>
-								<span className="header-account-text">CHECKOUT</span>
+								<CartPreview />
 							</div>
 							<div className="col-12 text-center">
 								<span className="title-name">FASHON</span>

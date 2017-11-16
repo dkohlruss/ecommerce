@@ -42,9 +42,20 @@ app.get('/user/', (req, res) => {
 	res.send('User API');
 });
 
-app.get('/user/:id', (req, res) => {
-	let user = req.params.id;
-	res.send(`Placeholder get path for ${user}; unlikely to be used`);
+app.get('/user/cart', (req, res) => {
+	res.send([
+		{
+			name: 'Seeded Product'
+		},
+		{ name: 'Seeded Product 2' }
+	]);
+});
+
+app.post('/user/cart', (req, res) => {
+	let seedItem = {
+		name: 'Seeded Product 3'
+	};
+	res.send(seedItem);
 });
 
 app.post('/user/login/', (req, res) => {

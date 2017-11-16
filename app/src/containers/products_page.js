@@ -62,7 +62,6 @@ class ProductsPage extends Component {
 	}
 
 	sortProducts(value) {
-		console.log(value);
 		this.setState({ sortBy: value });
 	}
 
@@ -76,7 +75,7 @@ class ProductsPage extends Component {
 						<select
 							name="filter"
 							className="product-select"
-							defaultValue=""
+							defaultValue="filter"
 							onChange={event => this.sortProducts(event.target.value)}
 						>
 							<option value="filter" disabled>
@@ -85,8 +84,8 @@ class ProductsPage extends Component {
 							<option value="none">None</option>
 							<option value="Name AZ">Name: A-Z</option>
 							<option value="Name ZA">Name: Z-A</option>
-							<option value="Price Asc">Price: High to Low</option>
-							<option value="Price Desc">Price: Low to High</option>
+							<option value="Price Desc">Price: High to Low</option>
+							<option value="Price Asc">Price: Low to High</option>
 						</select>
 					</div>
 					<div className="col-12 text-center">

@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { fetchProduct } from '../actions';
 
 import ProductSizes from '../components/product_sizes';
-import ProductButton from '../components/product_button';
+import ProductButton from '../containers/product_button';
 
 class ProductPage extends Component {
 	constructor(props) {
