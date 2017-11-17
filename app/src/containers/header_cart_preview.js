@@ -15,7 +15,12 @@ class CartPreview extends Component {
 	render() {
 		return (
 			<span className="header-account-text">
-				Cart: {this.props.cart.length}
+				Cart:{' '}
+				{this.props.cart.length > 0 ? (
+					<span className="cart-circle">{this.props.cart.length}</span>
+				) : (
+					<span />
+				)}
 			</span>
 		);
 	}
