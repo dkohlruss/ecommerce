@@ -93,6 +93,7 @@ class ProductPage extends Component {
 						/>
 
 						<ProductButton
+							product={this.props.product[0]._id}
 							stock={this.state.selectedStock}
 							size={this.state.selectedSize}
 						/>

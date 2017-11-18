@@ -9,7 +9,8 @@ class ProductButton extends Component {
 	}
 
 	clickButton() {
-		console.log(this.props.addCart());
+		console.log(this.props.product);
+		this.props.addCart(this.props.product);
 	}
 
 	createButton() {

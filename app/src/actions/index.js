@@ -18,8 +18,8 @@ export function fetchProduct(name) {
 	};
 }
 
-export function addCart(item) {
-	const request = axios.post(`http://localhost:3001/user/cart`, { item });
+export function addCart(product) {
+	const request = axios.post(`http://localhost:3001/user/cart`, { product });
 
 	return {
 		type: 'ADD_CART',

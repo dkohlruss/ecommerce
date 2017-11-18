@@ -49,14 +49,9 @@ footer {
 .cart-circle {
 	display: inline-block;
 	margin: 0 0 0 2px;
-	background: rgba(27, 140, 59, 1);
-	border-radius: 50%;
 	position: relative;
 	min-width: 10px;
 	padding: 0 3px;
-	line-height: 13px;
-	text-align: center;
-	font-size: 11px;
 }
 
 .footer-title {
