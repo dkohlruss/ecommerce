@@ -9,13 +9,13 @@ const { Product } = require('../db/models/product');
 const users = [
 	{
 		_id: new ObjectID(),
-		username: 'sildsajfl',
+		username: 'dave123',
 		password: 'password1',
 		level: 0
 	},
 	{
 		_id: new ObjectID(),
-		username: '8dsvbni1n1',
+		username: 'steve',
 		password: '821viin21v',
 		level: 1
 	}
@@ -27,7 +27,8 @@ const products = [
 		designer: 'Seed Designer',
 		category: 'Seed Category',
 		price: '55.99',
-		description: 'Seed Description'
+		description: 'Seed Description',
+		stock: '5'
 	},
 	{
 		name: 'Seeded Product 2',

@@ -43,19 +43,71 @@ app.get('/user/', (req, res) => {
 });
 
 app.get('/user/cart', (req, res) => {
-	res.send([
-		{
-			name: 'Seeded Product'
-		},
-		{ name: 'Seeded Product 2' }
-	]);
+	let params = {
+		username: 'dave123'
+	};
+
+	User.findOne(params)
+		.then(result => {
+			console.log(result);
+
+			res.send(result.cart);
+		})
+		.catch(err => {
+			res.status(400).send();
+		});
+});
+
+app.get('/user/cartDetail', (req, res) => {
+	let params = {
+		username: 'dave123'
+	};
+
+	User.findOne(params)
+		.then(result => {
+			let cart = [];
+			while (result.cart.length > 0) {
+				let item = result.cart.pop();
+				let isNew = true;
+
+				for (let i = 0; i < cart.length; i++) {
+					if (item.name === cart[i].name && item.size === cart[i].size) {
+						isNew = false;
+						cart[i].quantity++;
+					}
+				}
+
+				if (isNew) {
+					item.quantity = 1;
+					cart.push(item);
+				}
+			}
+
+			res.send(cart);
+		})
+		.catch(err => {
+			console.log(err);
+			res.status(400).send();
+		});
 });
 
 app.post('/user/cart', (req, res) => {
-	let seedItem = {
-		name: 'Seeded Product 3'
-	};
-	res.send(seedItem);
+	let product = _.pick(req.body.product, ['name', 'price', 'size']);
+
+	User.findOneAndUpdate(
+		{ username: 'dave123' },
+		{
+			$push: {
+				cart: product
+			}
+		},
+		{
+			new: true
+		}
+	).then(result => {
+		console.log(result);
+		res.send(result.cart);
+	});
 });
 
 app.post('/user/login/', (req, res) => {
@@ -67,7 +119,7 @@ app.post('/user/login/', (req, res) => {
 
 app.post('/user/register/', (req, res) => {
 	let body = _.pick(req.body, ['username', 'password']);
-
+	body.cart = [];
 	let user = new User(body);
 
 	user
@@ -106,14 +158,11 @@ app.get('/api/product/:name', (req, res) => {
 	// Picks off all info from specific item
 	let params = { name: req.params.name };
 
-	console.log(params);
-
 	Product.aggregate([
 		{
 			$match: params
 		}
 	]).then(result => {
-		console.log(result);
 		res.send(result);
 	});
 
