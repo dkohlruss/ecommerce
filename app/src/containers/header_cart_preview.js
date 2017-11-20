@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 import { addCart, fetchCart } from '../actions';
 
@@ -9,12 +10,16 @@ class CartPreview extends Component {
 
 		this.state = { cartCount: 0 };
 	}
-	componentDidMount() {
+	componentWillMount() {
 		this.props.fetchCart();
 	}
 
 	componentWillReceiveProps(newProps) {
-		this.setState({ cartCount: newProps.cart.length });
+		let cartCount = 0;
+		for (let i = 0; i < newProps.cart.length; i++) {
+			cartCount += newProps.cart[i].quantity;
+		}
+		this.setState({ cartCount });
 	}
 
 	render() {
@@ -22,7 +27,8 @@ class CartPreview extends Component {
 			<span className="header-account-text">
 				{this.state.cartCount > 0 ? (
 					<span>
-						IN CART: <span className="cart-circle">{this.state.cartCount}</span>
+						YOUR CART:
+						<span className="cart-circle">{this.state.cartCount}</span>{' '}
 					</span>
 				) : (
 					<span>EMPTY CART</span>

@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { fetchProduct } from '../actions';
+import { addCart, fetchProduct } from '../actions';
 
 import ProductSizes from '../components/product_sizes';
-import ProductButton from '../containers/product_button';
+import ProductButton from '../components/product_button';
 
 class ProductPage extends Component {
 	constructor(props) {
@@ -16,7 +16,7 @@ class ProductPage extends Component {
 		};
 	}
 
-	componentDidMount() {
+	componentWillMount() {
 		let { productName } = this.props.match.params;
 		this.props.fetchProduct(productName);
 	}
@@ -33,16 +33,18 @@ class ProductPage extends Component {
 		}
 	}
 
+	addCart(product) {
+		this.props.addCart(this.props.product);
+	}
+
 	handleSizeChange(size) {
-		let products = this.props.product;
-		products = products.map(product => {
-			if (product.size === size || !product.size) {
-				this.setState({
-					selectedSize: size,
-					selectedStock: product.stock
-				});
-			}
-		});
+		let product = this.props.product;
+		if (product.size === size || !product.size) {
+			this.setState({
+				selectedSize: size,
+				selectedStock: product.stock
+			});
+		}
 	}
 
 	render() {
@@ -81,10 +83,8 @@ class ProductPage extends Component {
 					</div>
 					<div className="col-6 product-details">
 						<div className="col-12 text-center">
-							<span className="product-title">
-								{this.props.product[0].name}
-							</span>
-							<p className="product-price">{this.props.product[0].price}</p>
+							<span className="product-title">{this.props.product.name}</span>
+							<p className="product-price">{this.props.product.price}</p>
 						</div>
 
 						<ProductSizes
@@ -93,7 +93,8 @@ class ProductPage extends Component {
 						/>
 
 						<ProductButton
-							product={this.props.product[0]._id}
+							addCart={this.addCart.bind(this)}
+							product={this.props.product._id}
 							stock={this.state.selectedStock}
 							size={this.state.selectedSize}
 						/>
@@ -101,10 +102,10 @@ class ProductPage extends Component {
 						<div className="col-12 product-section">
 							<span className="product-bolded">PRODUCT DETAILS</span>
 							<p className="product-description">
-								{this.props.product[0].description}
+								{this.props.product.description}
 							</p>
 							<span className="product-designer">
-								Designer: {this.props.product[0].designer}
+								Designer: {this.props.product.designer}
 							</span>
 						</div>
 						<div className="col-12 product-section">
@@ -140,4 +141,4 @@ function mapStateToProps(state) {
 	};
 }
 
-export default connect(mapStateToProps, { fetchProduct })(ProductPage);
+export default connect(mapStateToProps, { addCart, fetchProduct })(ProductPage);

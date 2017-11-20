@@ -8,14 +8,12 @@ class ProductSizes extends Component {
 	}
 
 	getSizes() {
-		let sizes = this.props.products.map(product => {
-			return product.size;
-		});
+		let sizes = this.props.products.sizes;
 
 		return (
 			<select
 				name="size"
-				key={`size${this.props.products[0].name}`}
+				key={`size${this.props.products.name}`}
 				className="product-select product-size-select"
 				defaultValue="size"
 				onChange={event => {
@@ -25,20 +23,19 @@ class ProductSizes extends Component {
 				<option key="defaultSize" value="size" disabled>
 					Size
 				</option>
-				{sizes.map(size => {
-					if (!size) {
+				{!sizes ? (
+					<option key={'nosize'} value={'No Size'}>
+						No Size
+					</option>
+				) : (
+					sizes.map(size => {
 						return (
-							<option key={'nosize'} value={'No Size'}>
-								No Size
+							<option key={size} value={size}>
+								{size}
 							</option>
 						);
-					}
-					return (
-						<option key={size} value={size}>
-							{size}
-						</option>
-					);
-				})}
+					})
+				)}
 			</select>
 		);
 	}

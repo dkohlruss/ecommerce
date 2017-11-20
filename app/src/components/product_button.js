@@ -1,7 +1,4 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
-
-import { addCart } from '../actions';
 
 class ProductButton extends Component {
 	constructor(props) {
@@ -9,7 +6,6 @@ class ProductButton extends Component {
 	}
 
 	clickButton() {
-		console.log(this.props.product);
 		this.props.addCart(this.props.product);
 	}
 
@@ -46,4 +42,4 @@ class ProductButton extends Component {
 	}
 }
 
-export default connect(null, { addCart })(ProductButton);
+export default ProductButton;

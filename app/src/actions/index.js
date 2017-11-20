@@ -28,10 +28,19 @@ export function addCart(product) {
 }
 
 export function fetchCart() {
-	const request = axios.get(`http://localhost:3001/user/cart`);
+	const request = axios.get(`http://localhost:3001/user/cart/`);
 
 	return {
 		type: 'FETCH_CART',
+		payload: request
+	};
+}
+
+export function fetchCartDetail() {
+	const request = axios.get(`http://localhost:3001/user/cartDetail`);
+
+	return {
+		type: 'FETCH_CART_DETAIL',
 		payload: request
 	};
 }

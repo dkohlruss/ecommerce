@@ -7,7 +7,7 @@ import _ from 'lodash';
 import '../css/interior.css';
 
 class Sidebar extends Component {
-	componentDidMount() {
+	componentWillMount() {
 		this.props.fetchPosts();
 	}
 

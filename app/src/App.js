@@ -6,12 +6,12 @@ import { createStore, applyMiddleware } from 'redux';
 import Header from './components/header';
 import Footer from './components/footer';
 import Sidebar from './containers/sidebar';
+import CartPage from './containers/cart_page';
 
 import LandingPage from './components/landing_page';
 import ProductPage from './containers/product_page';
 import ProductsPage from './containers/products_page';
 import AdminPage from './components/admin_page';
-import CartPage from './components/cart_page';
 
 import './css/index.css';
 

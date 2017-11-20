@@ -5,6 +5,7 @@ const _ = require('lodash');
 const { mongoose } = require('./db/mongoose');
 const { User } = require('./db/models/user');
 const { Product } = require('./db/models/product');
+const { makeCart } = require('./helpers');
 
 // const passport = require('passport');
 // const Strategy = require('passport-http').BasicStrategy;
@@ -49,44 +50,11 @@ app.get('/user/cart', (req, res) => {
 
 	User.findOne(params)
 		.then(result => {
-			console.log(result);
-
-			res.send(result.cart);
-		})
-		.catch(err => {
-			res.status(400).send();
-		});
-});
-
-app.get('/user/cartDetail', (req, res) => {
-	let params = {
-		username: 'dave123'
-	};
-
-	User.findOne(params)
-		.then(result => {
-			let cart = [];
-			while (result.cart.length > 0) {
-				let item = result.cart.pop();
-				let isNew = true;
-
-				for (let i = 0; i < cart.length; i++) {
-					if (item.name === cart[i].name && item.size === cart[i].size) {
-						isNew = false;
-						cart[i].quantity++;
-					}
-				}
-
-				if (isNew) {
-					item.quantity = 1;
-					cart.push(item);
-				}
-			}
-
+			let cart = makeCart(result);
+			console.log(cart);
 			res.send(cart);
 		})
 		.catch(err => {
-			console.log(err);
 			res.status(400).send();
 		});
 });
@@ -105,8 +73,8 @@ app.post('/user/cart', (req, res) => {
 			new: true
 		}
 	).then(result => {
-		console.log(result);
-		res.send(result.cart);
+		let cart = makeCart(result);
+		res.send(cart);
 	});
 });
 
