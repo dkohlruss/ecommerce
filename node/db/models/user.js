@@ -115,6 +115,7 @@ UserSchema.statics.findByCreds = function(username, password) {
 		return new Promise((resolve, reject) => {
 			bcrypt.compare(password, user.password, (err, result) => {
 				if (result) {
+					console.log('success in User');
 					resolve(user);
 				} else {
 					reject();

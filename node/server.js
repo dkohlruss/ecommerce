@@ -1,28 +1,48 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+const cookieParser = require('cookie-parser');
+const session = require('express-session');
+const flash = require('express-flash');
 const _ = require('lodash');
+
+const passport = require('passport');
+const LocalStrategy = require('passport-local').Strategy;
 
 const { mongoose } = require('./db/mongoose');
 const { User } = require('./db/models/user');
 const { Product } = require('./db/models/product');
 const { makeCart } = require('./helpers');
 
-// const passport = require('passport');
-// const Strategy = require('passport-http').BasicStrategy;
-
-// passport.use(new Strategy(
-//   function(username, password, next) {
-//     db.users.findByUsername(username, function(err, user) {
-//       if (err) { return next(err); }
-//       if (!user) { return next(null, false); }
-//       if (user.password != password) { return next(null, false); }
-//       return next(null, user);
-//     });
-//   }
-// ));
-
 const app = express();
 app.use(bodyParser.json());
+app.use(cookieParser());
+app.use(session({ secret: 'secretphrase' }));
+app.use(passport.initialize());
+app.use(passport.session());
+app.use(flash());
+
+// PASSPORT STRATEGY & INIT
+passport.serializeUser(function(user, done) {
+	done(null, { username: user.username, level: user.level });
+});
+
+passport.deserializeUser(function(user, done) {
+	done(null, user);
+});
+
+passport.use(
+	new LocalStrategy(function(username, password, done) {
+		User.findByCreds(username, password)
+			.then(user => {
+				console.log('success case', user);
+				done(null, user);
+			})
+			.catch(err => {
+				console.log(('error case', err));
+				done(err, false);
+			});
+	})
+);
 
 app.use(function(req, res, next) {
 	res.header('Access-Control-Allow-Origin', '*');
@@ -44,45 +64,61 @@ app.get('/user/', (req, res) => {
 });
 
 app.get('/user/cart', (req, res) => {
-	let params = {
-		username: 'dave123'
-	};
+	if (req.isAuthenticated()) {
+		let params = {
+			username: req.user.username
+		};
 
-	User.findOne(params)
-		.then(result => {
-			let cart = makeCart(result);
-			console.log(cart);
-			res.send(cart);
-		})
-		.catch(err => {
-			res.status(400).send();
-		});
+		User.findOne(params)
+			.then(result => {
+				let cart = makeCart(result);
+				console.log(cart);
+				res.send(cart);
+			})
+			.catch(err => {
+				res.status(400).send();
+			});
+	} else {
+		// Send cart information from session data
+		res.send(req.session.cart);
+	}
 });
 
 app.post('/user/cart', (req, res) => {
-	let product = _.pick(req.body.product, ['name', 'price', 'size']);
+	if (req.isAuthenticated()) {
+		let product = _.pick(req.body.product, ['name', 'price', 'size']);
 
-	User.findOneAndUpdate(
-		{ username: 'dave123' },
-		{
-			$push: {
-				cart: product
+		User.findOneAndUpdate(
+			{ username: req.user.username },
+			{
+				$push: {
+					cart: product
+				}
+			},
+			{
+				new: true
 			}
-		},
-		{
-			new: true
-		}
-	).then(result => {
-		let cart = makeCart(result);
-		res.send(cart);
-	});
+		).then(result => {
+			let cart = makeCart(result);
+			res.send(cart);
+		});
+	} else {
+		// Store cart information in sesison data.
+		req.session.cart
+			? req.session.cart.push(product)
+			: (req.sesison.cart = [product]);
+	}
 });
 
-app.post('/user/login/', (req, res) => {
-	// Placeholder for login
-	let body = _.pick(req.body, ['email', 'password']);
+app.post('/user/login/', passport.authenticate('local'), (req, res) => {
+	if (req.user) {
+		res.send(req.session.passport.user);
+	}
+});
 
-	res.send(body);
+app.post('/user/logout', function(req, res) {
+	req.logout();
+	res.send('Logged out');
 });
 
 app.post('/user/register/', (req, res) => {
