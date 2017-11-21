@@ -45,7 +45,8 @@ passport.use(
 );
 
 app.use(function(req, res, next) {
-	res.header('Access-Control-Allow-Origin', '*');
+	res.header('Access-Control-Allow-Origin', 'http://localhost:3000');
+	res.header('Access-Control-Allow-Credentials', true);
 	res.header(
 		'Access-Control-Allow-Headers',
 		'Origin, X-Requested-With, Content-Type, Accept'
@@ -64,6 +65,7 @@ app.get('/user/', (req, res) => {
 });
 
 app.get('/user/cart', (req, res) => {
+	console.log(req.session);
 	if (req.isAuthenticated()) {
 		let params = {
 			username: req.user.username
@@ -79,15 +81,17 @@ app.get('/user/cart', (req, res) => {
 				res.status(400).send();
 			});
 	} else {
-		// Send cart information from session data
-		res.send(req.session.cart);
+		// Deep clone req.session.cart into new array
+		let cartArr = JSON.parse(JSON.stringify(req.session.cart));
+		cart = makeCart({ cart: cartArr });
+		res.send(cart);
 	}
 });
 
 app.post('/user/cart', (req, res) => {
+	console.log(req.session.id);
+	let product = _.pick(req.body.product, ['name', 'price', 'size']);
 	if (req.isAuthenticated()) {
-		let product = _.pick(req.body.product, ['name', 'price', 'size']);
-
 		User.findOneAndUpdate(
 			{ username: req.user.username },
 			{
@@ -103,17 +107,25 @@ app.post('/user/cart', (req, res) => {
 			res.send(cart);
 		});
 	} else {
-		// Store cart information in sesison data.
+		//Store cart information in session data.
 		req.session.cart
 			? req.session.cart.push(product)
-			: (req.sesison.cart = [product]);
+			: (req.session.cart = [product]);
+
+		// Deep clone req.session.cart into new array
+		let cartArr = JSON.parse(JSON.stringify(req.session.cart));
+		cart = makeCart({ cart: cartArr });
+		res.send(cart);
 	}
 });
 
-app.post('/user/login/', passport.authenticate('local'), (req, res) => {
-	if (req.user) {
-		res.send(req.session.passport.user);
-	}
+app.post('/user/login/', passport.authenticate('local'), (req, res, next) => {
+	req.logIn(user, function(err) {
+		if (err) {
+			res.send(err);
+		}
+		return res.send(user);
+	});
 });
 
 app.post('/user/logout', function(req, res) {
@@ -169,18 +181,6 @@ app.get('/api/product/:name', (req, res) => {
 	]).then(result => {
 		res.send(result);
 	});
-
-	// Product.find(params)
-	// 	.then(products => {
-	// 		if (products.length === 0) {
-	// 			res.status(404).send();
-	// 		} else {
-	// 			res.send(products);
-	// 		}
-	// 	})
-	// 	.catch(err => {
-	// 		res.status(400).send();
-	// 	});
 });
 
 app.post('/api/new', (req, res) => {
