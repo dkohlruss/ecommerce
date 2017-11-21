@@ -10,6 +10,7 @@ class CartPreview extends Component {
 
 		this.state = { cartCount: 0 };
 	}
+
 	componentWillMount() {
 		this.props.fetchCart();
 	}

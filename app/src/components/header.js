@@ -2,16 +2,13 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 
 import CartPreview from '../containers/header_cart_preview';
+import HeaderLogins from '../containers/header_login_links';
 
 import '../css/interior.css';
 
 class Header extends Component {
 	constructor(props) {
 		super(props);
-	}
-
-	login() {
-		console.log('log in clicked!');
 	}
 
 	render() {
@@ -21,9 +18,7 @@ class Header extends Component {
 					<div className="container">
 						<div className="row header-top">
 							<div className="col-12 text-right">
-								<span className="header-account-text" onClick={this.login}>
-									LOGIN
-								</span>
+								<HeaderLogins />
 								<CartPreview />
 							</div>
 							<div className="col-12 text-center">
