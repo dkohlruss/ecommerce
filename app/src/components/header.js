@@ -7,10 +7,6 @@ import HeaderLogins from '../containers/header_login_links';
 import '../css/interior.css';
 
 class Header extends Component {
-	constructor(props) {
-		super(props);
-	}
-
 	render() {
 		return (
 			<div>

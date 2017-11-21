@@ -24,6 +24,7 @@ class CartPreview extends Component {
 	}
 
 	render() {
+		console.log(this.props);
 		return (
 			<span className="header-account-text">
 				{this.state.cartCount > 0 ? (

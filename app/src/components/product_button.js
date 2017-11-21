@@ -35,7 +35,6 @@ class ProductButton extends Component {
 	}
 
 	render() {
-		console.log(this.props);
 		let button = this.createButton();
 
 		return <div className="col-12 product-section">{button}</div>;

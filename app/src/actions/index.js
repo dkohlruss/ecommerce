@@ -38,11 +38,11 @@ export function fetchCart() {
 	};
 }
 
-export function fetchCartDetail() {
-	const request = axios.get(`http://localhost:3001/user/cartDetail`);
+export function fetchUser() {
+	const request = axios.get(`http://localhost:3001/user`);
 
 	return {
-		type: 'FETCH_CART_DETAIL',
+		type: 'FETCH_USER',
 		payload: request
 	};
 }
@@ -52,6 +52,15 @@ export function userLogin(params) {
 
 	return {
 		type: 'USER_LOGIN',
+		payload: request
+	};
+}
+
+export function userLogout() {
+	const request = axios.post(`http://localhost:3001/user/logout`);
+
+	return {
+		type: 'USER_LOGOUT',
 		payload: request
 	};
 }
