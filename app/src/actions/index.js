@@ -1,5 +1,7 @@
 import axios from 'axios';
 
+axios.defaults.withCredentials = true;
+
 export function fetchPosts() {
 	const request = axios.get('http://localhost:3001/api/');
 
@@ -41,6 +43,24 @@ export function fetchCartDetail() {
 
 	return {
 		type: 'FETCH_CART_DETAIL',
+		payload: request
+	};
+}
+
+export function userLogin(params) {
+	const request = axios.post(`http://localhost:3001/user/login`, params);
+
+	return {
+		type: 'USER_LOGIN',
+		payload: request
+	};
+}
+
+export function userRegister(params) {
+	const request = axios.post(`http://localhost:3001/user/register`, params);
+
+	return {
+		type: 'USER_REGISTER',
 		payload: request
 	};
 }
