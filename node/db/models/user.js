@@ -41,70 +41,9 @@ let UserSchema = new mongoose.Schema({
 	// }]
 });
 
-// Instance methods (small u user)
-UserSchema.methods.generateAuthToken = function() {
-	let user = this;
-
-	let access = 'auth';
-	let token = jwt
-		.sign(
-			{
-				_id: user._id.toHexString(),
-				access
-			},
-			'secretval'
-		)
-		.toString();
-
-	user.tokens.push({ access, token });
-
-	return user.save().then(() => {
-		return token;
-	});
-};
-
-// Returns only properties given (to avoid including password, token, and other sensitive info)
-UserSchema.methods.toJSON = function() {
-	let user = this;
-	let userObject = user.toObject();
-
-	return _.pick(userObject, ['_id', 'username', 'level']);
-};
-
-UserSchema.methods.removeToken = function(token) {
-	let user = this;
-
-	return user.update({
-		$pull: {
-			tokens: {
-				token: token
-			}
-		}
-	});
-};
-
-// Model Methods on big U User
-UserSchema.statics.findByToken = function(token) {
-	let User = this;
-	var decoded;
-
-	try {
-		decoded = jwt.verify(token, 'secretval');
-	} catch (e) {
-		return Promise.reject();
-	}
-
-	return User.findOne({
-		_id: decoded._id,
-		'tokens.token': token,
-		'tokens.access': 'auth'
-	});
-};
-
 UserSchema.statics.findByCreds = function(username, password) {
 	let User = this;
 
-	// Find user first...
 	return User.findOne({
 		username: username
 	}).then(user => {
@@ -115,7 +54,6 @@ UserSchema.statics.findByCreds = function(username, password) {
 		return new Promise((resolve, reject) => {
 			bcrypt.compare(password, user.password, (err, result) => {
 				if (result) {
-					console.log('success in User');
 					resolve(user);
 				} else {
 					reject();
