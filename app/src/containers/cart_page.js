@@ -11,6 +11,7 @@ class CartPage extends Component {
 		super(props);
 		this.state = { cart: null };
 	}
+
 	componentWillMount() {
 		this.props.fetchCart();
 	}
