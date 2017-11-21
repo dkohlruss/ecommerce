@@ -2,10 +2,9 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
-const flash = require('express-flash');
 const _ = require('lodash');
-
 const passport = require('passport');
+
 const LocalStrategy = require('passport-local').Strategy;
 
 const { mongoose } = require('./db/mongoose');
@@ -19,7 +18,6 @@ app.use(cookieParser());
 app.use(session({ secret: 'secretphrase' }));
 app.use(passport.initialize());
 app.use(passport.session());
-app.use(flash());
 
 // PASSPORT STRATEGY & INIT
 passport.serializeUser(function(user, done) {
@@ -34,11 +32,9 @@ passport.use(
 	new LocalStrategy(function(username, password, done) {
 		User.findByCreds(username, password)
 			.then(user => {
-				console.log('success case', user);
 				done(null, user);
 			})
 			.catch(err => {
-				console.log(('error case', err));
 				done(err, false);
 			});
 	})
@@ -58,8 +54,6 @@ app.get('/', (req, res) => {
 	res.status(200).send('Main entrypoint (never used)');
 });
 
-// USER PATHS FOR LOGIN/REGISTRATION
-
 app.get('/user/', (req, res) => {
 	res.send('User API');
 });
@@ -74,7 +68,6 @@ app.get('/user/cart', (req, res) => {
 		User.findOne(params)
 			.then(result => {
 				let cart = makeCart(result);
-				console.log(cart);
 				res.send(cart);
 			})
 			.catch(err => {
@@ -83,13 +76,12 @@ app.get('/user/cart', (req, res) => {
 	} else {
 		// Deep clone req.session.cart into new array
 		let cartArr = JSON.parse(JSON.stringify(req.session.cart));
-		cart = makeCart({ cart: cartArr });
+		let cart = makeCart({ cart: cartArr });
 		res.send(cart);
 	}
 });
 
 app.post('/user/cart', (req, res) => {
-	console.log(req.session.id);
 	let product = _.pick(req.body.product, ['name', 'price', 'size']);
 	if (req.isAuthenticated()) {
 		User.findOneAndUpdate(
@@ -107,25 +99,23 @@ app.post('/user/cart', (req, res) => {
 			res.send(cart);
 		});
 	} else {
-		//Store cart information in session data.
+		//Store cart information in session data if user not logged in.
 		req.session.cart
 			? req.session.cart.push(product)
 			: (req.session.cart = [product]);
 
 		// Deep clone req.session.cart into new array
 		let cartArr = JSON.parse(JSON.stringify(req.session.cart));
-		cart = makeCart({ cart: cartArr });
+		let cart = makeCart({ cart: cartArr });
 		res.send(cart);
 	}
 });
 
+// USER PATHS FOR LOGIN/REGISTRATION
+
 app.post('/user/login/', passport.authenticate('local'), (req, res, next) => {
-	req.logIn(user, function(err) {
-		if (err) {
-			res.send(err);
-		}
-		return res.send(user);
-	});
+	let user = req.session.passport.user;
+	res.send(user);
 });
 
 app.post('/user/logout', function(req, res) {
@@ -193,7 +183,6 @@ app.post('/api/new', (req, res) => {
 		'price',
 		'description',
 		'size',
-		'color',
 		'stock'
 	]);
 
