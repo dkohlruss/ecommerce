@@ -29,6 +29,18 @@ export function addCart(product) {
 	};
 }
 
+export function deleteCart(product) {
+	console.log(product);
+	const request = axios.delete(`http://localhost:3001/user/cart`, {
+		data: product
+	});
+
+	return {
+		type: 'DELETE_CART',
+		payload: request
+	};
+}
+
 export function fetchCart() {
 	const request = axios.get(`http://localhost:3001/user/cart/`);
 

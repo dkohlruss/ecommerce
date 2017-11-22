@@ -18,7 +18,9 @@ class Header extends Component {
 								<CartPreview />
 							</div>
 							<div className="col-12 text-center">
-								<span className="title-name">FASHON</span>
+								<Link to={'/'}>
+									<span className="title-name">FASHON</span>
+								</Link>
 							</div>
 						</div>
 					</div>
@@ -30,7 +32,7 @@ class Header extends Component {
 								<div className="nav-div">
 									<ul className="list-inline d-flex justify-content-center nav-list">
 										<li className="list-inline-item nav-item">
-											<Link to={'/main/products'}>HOME</Link>
+											<Link to={'/main/products'}>ALL PRODUCTS</Link>
 										</li>
 										<li className="list-inline-item nav-item" id="accessories">
 											<Link to={'/main/products/accessories'}>ACCESSORIES</Link>

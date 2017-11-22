@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
-import { fetchCart } from '../actions';
+import { fetchCart, deleteCart } from '../actions';
 
 import CartDetails from '../components/cart_details';
 
@@ -22,15 +22,36 @@ class CartPage extends Component {
 		}
 	}
 
+	deleteItem(item) {
+		this.props.deleteCart(item);
+	}
+
 	render() {
 		return (
-			<div className="col-10">
+			<div className="col-10 cart-container">
 				<div className="row">
 					<div className="col-12">
-						<h2 className="text-center">Your Shopping Bag</h2>
+						<h2 className="text-center">
+							{this.props.cart.length > 0
+								? 'Your Shopping Bag'
+								: 'Your Bag is Empty'}
+						</h2>
 					</div>
 				</div>
-				<CartDetails cart={this.props.cart} />
+				<CartDetails
+					deleteItem={this.deleteItem.bind(this)}
+					cart={this.props.cart}
+				/>
+
+				{this.props.cart.length > 0 ? (
+					<div className="row push-down">
+						<div className="col-lg-2">
+							<button className="btn btn-block button-add-to-bag">
+								Checkout
+							</button>
+						</div>
+					</div>
+				) : null}
 			</div>
 		);
 	}
@@ -40,4 +61,4 @@ function mapStateToProps(state) {
 	return { cart: state.cart };
 }
 
-export default connect(mapStateToProps, { fetchCart })(CartPage);
+export default connect(mapStateToProps, { fetchCart, deleteCart })(CartPage);

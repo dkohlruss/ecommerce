@@ -26,6 +26,10 @@ h1 {
 	font-family: 'Playfair Display', serif;
 }
 
+h2 {
+	margin-bottom: 5%;
+}
+
 header {
 	background-color: #1f1f24;
 }
@@ -46,12 +50,26 @@ footer {
 	min-height: 80px;
 }
 
-.cart-circle {
-	display: inline-block;
-	margin: 0 0 0 2px;
-	position: relative;
-	min-width: 10px;
-	padding: 0 3px;
+.modal-btn {
+	padding: 0;
+}
+
+.push-down {
+	display: flex;
+	flex-direction: row-reverse;
+	margin-top: 30px;
+}
+
+.cart-item {
+	display: block;
+}
+
+.cart-qty {
+	font-size: 0.8em;
+}
+
+.cart-container {
+	min-height: 70vh;
 }
 
 .footer-title {
@@ -94,6 +112,16 @@ footer {
 	font-size: 0.6em;
 	font-weight: bold;
 	margin: 5px 10px;
+}
+
+.header-account-link a {
+	color: #d2c2b0;
+	cursor: pointer;
+}
+
+.header-account-link {
+	color: #d2c2b0;
+	cursor: pointer;
 }
 
 .nav-div {

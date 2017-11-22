@@ -8,6 +8,8 @@ export default function(state = [], action) {
 			return action.payload.data;
 		case 'ADD_CART':
 			return action.payload.data;
+		case 'DELETE_CART':
+			return action.payload.data;
 		default:
 			return state;
 	}

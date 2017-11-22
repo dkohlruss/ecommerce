@@ -24,13 +24,14 @@ class CartPreview extends Component {
 	}
 
 	render() {
-		console.log(this.props);
 		return (
-			<span className="header-account-text">
+			<span className="header-account-text header-account-link">
 				{this.state.cartCount > 0 ? (
 					<span>
-						YOUR CART:
-						<span className="cart-circle">{this.state.cartCount}</span>{' '}
+						<Link to={'/main/cart'}>
+							YOUR CART:
+							<span className="cart-circle">{' ' + this.state.cartCount}</span>
+						</Link>
 					</span>
 				) : (
 					<span>EMPTY CART</span>
