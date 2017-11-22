@@ -5,6 +5,7 @@ const session = require('express-session');
 const _ = require('lodash');
 const passport = require('passport');
 
+const MongoStore = require('connect-mongo')(session);
 const LocalStrategy = require('passport-local').Strategy;
 
 const { mongoose } = require('./db/mongoose');
@@ -15,13 +16,21 @@ const { makeCart } = require('./helpers');
 const app = express();
 app.use(bodyParser.json());
 app.use(cookieParser());
-app.use(session({ secret: 'secretphrase' }));
+app.use(
+	session({
+		secret: 'secretphrase',
+		store: new MongoStore({ mongooseConnection: mongoose.connection })
+	})
+);
 app.use(passport.initialize());
 app.use(passport.session());
 
 // PASSPORT STRATEGY & INIT
 passport.serializeUser(function(user, done) {
-	done(null, { username: user.username, level: user.level });
+	let cartArr = [];
+	user.cart ? (cartArr = JSON.parse(JSON.stringify(user.cart))) : null;
+	let cart = makeCart({ cart: cartArr });
+	done(null, { username: user.username, level: user.level, cart });
 });
 
 passport.deserializeUser(function(user, done) {
@@ -47,6 +56,7 @@ app.use(function(req, res, next) {
 		'Access-Control-Allow-Headers',
 		'Origin, X-Requested-With, Content-Type, Accept'
 	);
+	res.header('Access-Control-Allow-Methods', 'GET, POST, DELETE');
 	next();
 });
 
@@ -55,11 +65,14 @@ app.get('/', (req, res) => {
 });
 
 app.get('/user/', (req, res) => {
-	res.send('User API');
+	if (req.user) {
+		res.send(req.user);
+	} else {
+		res.send(null);
+	}
 });
 
 app.get('/user/cart', (req, res) => {
-	console.log(req.session);
 	if (req.isAuthenticated()) {
 		let params = {
 			username: req.user.username
@@ -75,14 +88,46 @@ app.get('/user/cart', (req, res) => {
 			});
 	} else {
 		// Deep clone req.session.cart into new array
-		let cartArr = JSON.parse(JSON.stringify(req.session.cart));
+		let cartArr = [];
+		req.session.cart
+			? (cartArr = JSON.parse(JSON.stringify(req.session.cart)))
+			: null;
 		let cart = makeCart({ cart: cartArr });
 		res.send(cart);
 	}
 });
 
+app.delete('/user/cart', (req, res) => {
+	let product = _.pick(req.body, ['name', 'size']);
+	if (req.isAuthenticated()) {
+		User.findOne({ username: req.user.username }).then(result => {
+			cartDelete(product.name, result.cart);
+			result.save();
+			let cartArr = JSON.parse(JSON.stringify(result.cart));
+			let cart = makeCart({ cart: cartArr });
+
+			res.send(cart);
+		});
+	} else {
+		cartDelete(product, req.session.cart);
+		let cartArr = JSON.parse(JSON.stringify(req.session.cart));
+		let cart = makeCart({ cart: cartArr });
+
+		res.send(cart);
+	}
+});
+
+cartDelete = function(product, cart) {
+	for (let i = 0; i < cart.length; i++) {
+		if (cart[i].name === product.name && cart[i].size === product.size) {
+			return cart.splice(i, 1);
+		}
+	}
+};
+
 app.post('/user/cart', (req, res) => {
 	let product = _.pick(req.body.product, ['name', 'price', 'size']);
+
 	if (req.isAuthenticated()) {
 		User.findOneAndUpdate(
 			{ username: req.user.username },
@@ -120,7 +165,12 @@ app.post('/user/login/', passport.authenticate('local'), (req, res, next) => {
 
 app.post('/user/logout', function(req, res) {
 	req.logout();
-	res.send('Logged out');
+	let cartArr = [];
+	req.session.cart
+		? (cartArr = JSON.parse(JSON.stringify(req.session.cart)))
+		: null;
+	let cart = makeCart({ cart: cartArr });
+	res.send(cart);
 });
 
 app.post('/user/register/', (req, res) => {
