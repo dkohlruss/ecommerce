@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import { userLogin, userRegister, userLogout, fetchUser } from '../actions';
 import Modal from 'react-modal';
 
@@ -50,9 +51,11 @@ class HeaderLogins extends Component {
 		];
 
 		this.adminLoggedIn = [
-			<span className="header-account-text" key="Admin">
-				ADMINISTRATION
-			</span>
+			<Link to={'/admin'} key="Admin">
+				<span className="header-account-text header-account-link">
+					ADMINISTRATION
+				</span>
+			</Link>
 		];
 	}
 
@@ -121,10 +124,6 @@ class HeaderLogins extends Component {
 	userLogout() {
 		this.setState({ modalIsOpen: false });
 		this.props.userLogout();
-	}
-
-	userLogin() {
-		this.props.userLogin({ username: 'dave1235', password: '123456' });
 	}
 
 	render() {

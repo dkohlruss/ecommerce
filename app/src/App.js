@@ -7,11 +7,12 @@ import Header from './components/header';
 import Footer from './components/footer';
 import Sidebar from './containers/sidebar';
 import CartPage from './containers/cart_page';
+import AdminPage from './containers/admin_page';
 
 import LandingPage from './components/landing_page';
 import ProductPage from './containers/product_page';
 import ProductsPage from './containers/products_page';
-import AdminPage from './components/admin_page';
+import AdminProduct from './components/admin_product';
 
 import './css/index.css';
 
@@ -26,8 +27,10 @@ class App extends Component {
 					<Route path="/" component={Header} />
 					<div className="container">
 						<div className="row">
+							<Route exact path="/admin/:page" component={AdminProduct} />
+							<Route exact path="/admin" component={AdminPage} />
+
 							<Route path="/main" component={Sidebar} />
-							<Route exact path="/main/admin" component={AdminPage} />
 							<Route exact path="/main/cart" component={CartPage} />
 							<Route exact path="/main" component={ProductsPage} />
 							<Route exact path="/main/products" component={ProductsPage} />

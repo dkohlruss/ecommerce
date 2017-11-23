@@ -50,6 +50,15 @@ footer {
 	min-height: 80px;
 }
 
+.admin-list {
+	font-weight: bold;
+	margin-bottom: 5px;
+}
+
+.admin-list-entries {
+	font-weight: normal;
+}
+
 .modal-btn {
 	padding: 0;
 }
