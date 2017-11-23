@@ -20,6 +20,15 @@ export function fetchProduct(name) {
 	};
 }
 
+export function fetchRandomProduct() {
+	const request = axios.get(`http://localhost:3001/api/random`);
+
+	return {
+		type: 'FETCH_RANDOM',
+		payload: request
+	};
+}
+
 export function addCart(product) {
 	const request = axios.post(`http://localhost:3001/user/cart`, { product });
 

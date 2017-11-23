@@ -8,10 +8,10 @@ import Footer from './components/footer';
 import Sidebar from './containers/sidebar';
 import CartPage from './containers/cart_page';
 import AdminPage from './containers/admin_page';
-
-import LandingPage from './components/landing_page';
+import LandingPage from './containers/landing_page';
 import ProductPage from './containers/product_page';
 import ProductsPage from './containers/products_page';
+
 import AdminProduct from './components/admin_product';
 
 import './css/index.css';
