@@ -8,7 +8,6 @@ class LandingCounter extends Component {
 	}
 
 	getNumbers() {
-		console.log('getting numbers');
 		let numbers = [];
 		for (let i = 1; i < this.props.numbers.length + 1; i++) {
 			numbers.push(

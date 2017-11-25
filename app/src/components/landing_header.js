@@ -16,7 +16,6 @@ class LandingHeader extends Component {
 	}
 
 	render() {
-		console.log(this.props);
 		return (
 			<div className="row landing-quarter">
 				<div className="col-12 landing-header">
