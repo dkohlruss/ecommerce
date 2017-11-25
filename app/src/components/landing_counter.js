@@ -3,8 +3,6 @@ import React, { Component } from 'react';
 class LandingCounter extends Component {
 	constructor(props) {
 		super(props);
-
-		console.log(this.props);
 	}
 
 	getNumbers() {
@@ -17,6 +15,7 @@ class LandingCounter extends Component {
 						(this.props.slide + 1 === i ? 'active-num' : '')
 					}
 					key={i}
+					onClick={this.props.changeCarousel}
 				>
 					{i}
 				</span>
@@ -27,7 +26,6 @@ class LandingCounter extends Component {
 	}
 
 	render() {
-		console.log('rendering');
 		return (
 			<div className="row landing-sixth">
 				<div className="col-12 landing-counter">{this.getNumbers()}</div>

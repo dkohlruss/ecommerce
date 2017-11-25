@@ -135,13 +135,13 @@ class HeaderLogins extends Component {
 			return loggedIn.concat(this.adminLoggedIn);
 		}
 
+		// onRequestClose={this.closeModal}
 		return (
 			<span>
 				{notLoggedIn}
 				<Modal
 					isOpen={this.state.modalIsOpen}
 					onAfterOpen={this.afterOpenModal}
-					onRequestClose={this.closeModal}
 					style={customStyles}
 				>
 					<div className="row">

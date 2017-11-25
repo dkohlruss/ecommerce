@@ -68,6 +68,7 @@ h1 {
 }
 
 .carousel-number {
+	cursor: pointer;
 	padding-right: 25px;
 }
 

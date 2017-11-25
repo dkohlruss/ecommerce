@@ -26,6 +26,7 @@ class LandingPage extends Component {
 		this.names = [];
 		this.phrases = [];
 		this.images = [];
+		this.carousel = '';
 
 		this.styles = {
 			fadeOutLeft: {
@@ -55,14 +56,21 @@ class LandingPage extends Component {
 
 	startCarousel(delay) {
 		let slide = this.state.currentSlide;
-		setInterval(() => {
-			setTimeout(() => {
-				this.setState({ styles: {} });
-				this.setState({ styles: this.styles });
-			}, 3000);
+		this.carousel = setInterval(() => {
+			// setTimeout(() => {
+			// 	this.setState({ styles: {} });
+			// 	this.setState({ styles: this.styles });
+			// }, 3000);
 			slide === this.names.length - 1 ? (slide = 0) : slide++;
 			this.setState({ currentSlide: slide });
 		}, delay);
+	}
+
+	changeCarousel(event) {
+		let currentSlide = event.target.innerHTML - 1;
+		clearInterval(this.carousel);
+		this.setState({ currentSlide });
+		this.startCarousel(5000);
 	}
 
 	render() {
@@ -83,6 +91,7 @@ class LandingPage extends Component {
 						<LandingCounter
 							slide={this.state.currentSlide}
 							numbers={this.names}
+							changeCarousel={this.changeCarousel.bind(this)}
 						/>
 					</div>
 					<LandingImage slide={this.state.currentSlide} />
