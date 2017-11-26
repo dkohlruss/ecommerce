@@ -8,6 +8,7 @@ const passport = require('passport');
 const MongoStore = require('connect-mongo')(session);
 const LocalStrategy = require('passport-local').Strategy;
 
+const { ObjectId } = require('mongodb');
 const { mongoose } = require('./db/mongoose');
 const { User } = require('./db/models/user');
 const { Product } = require('./db/models/product');
@@ -38,14 +39,19 @@ passport.deserializeUser(function(user, done) {
 });
 
 passport.use(
-	new LocalStrategy(function(username, password, done) {
-		User.findByCreds(username, password)
-			.then(user => {
-				done(null, user);
-			})
-			.catch(err => {
-				done(err, false);
-			});
+	new LocalStrategy({ passReqToCallback: true }, function(
+		req,
+		username,
+		password,
+		done
+	) {
+		return User.findByCreds(username, password, (err, user) => {
+			if (err) {
+				return done(err);
+			}
+
+			return done(null, user);
+		});
 	})
 );
 
@@ -158,9 +164,28 @@ app.post('/user/cart', (req, res) => {
 
 // USER PATHS FOR LOGIN/REGISTRATION
 
-app.post('/user/login/', passport.authenticate('local'), (req, res, next) => {
-	let user = req.session.passport.user;
-	res.send(user);
+app.post('/user/login/', (req, res, next) => {
+	return passport.authenticate('local', (err, user) => {
+		if (err) {
+			if (err.name === 'IncorrectCredentialsError') {
+				return res.status(400).json({
+					success: false,
+					message: err.message
+				});
+			}
+
+			return res.status(400).json({
+				success: false,
+				message: 'Could not process the form'
+			});
+		}
+
+		return res.json({
+			success: true,
+			message: 'Login successful',
+			user: user
+		});
+	})(req, res, next);
 });
 
 app.post('/user/logout', function(req, res) {
@@ -206,6 +231,24 @@ app.get('/api/', (req, res) => {
 			}
 		}
 	]).then(result => {
+		res.send(result);
+	});
+});
+
+app.get('/api/random', (req, res) => {
+	// Random products, good for large sites but bad for small demo site...
+	// Product.aggregate([{ $sample: { size: 5 } }]).then(result => {
+	// 	res.send(result);
+	// });
+	Product.find({
+		_id: {
+			$in: [
+				ObjectId('5a163e4bd841e822f95e1a02'),
+				ObjectId('5a163e4bd841e822f95e1a03'),
+				ObjectId('5a163e4bd841e822f95e1a05')
+			]
+		}
+	}).then(result => {
 		res.send(result);
 	});
 });
