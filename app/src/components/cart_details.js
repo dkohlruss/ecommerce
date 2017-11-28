@@ -5,7 +5,7 @@ const CartDetails = props => {
 	if (props.cart.length > 0) {
 		return props.cart.map(item => {
 			return (
-				<div className="row" key={item.name}>
+				<div className="row" key={item.name + item.size}>
 					<div className="col-md-2">Placeholder</div>
 					<div className="col-md-8">
 						<span className="cart-item">{item.name}</span>

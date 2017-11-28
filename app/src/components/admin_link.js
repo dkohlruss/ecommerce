@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom';
 class AdminLink extends Component {
 	constructor(props) {
 		super(props);
-		console.log(this.props);
 	}
 
 	render() {

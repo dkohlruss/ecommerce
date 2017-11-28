@@ -25,25 +25,27 @@ class ProductPage extends Component {
 		let oldName = this.props.match.params.productName;
 		let { productName } = nextProps.match.params;
 		if (oldName !== productName) {
-			this.props.fetchProduct(productName);
 			this.setState({
 				selectedSize: null,
 				selectedStock: null
 			});
+			this.props.fetchProduct(productName);
 		}
 	}
 
 	addCart(product) {
-		this.props.addCart(this.props.product);
+		this.props.addCart(product);
 	}
 
 	handleSizeChange(size) {
 		let product = this.props.product;
-		if (product.size === size || !product.size) {
-			this.setState({
-				selectedSize: size,
-				selectedStock: product.stock
-			});
+		for (let i = 0; i < product.length; i++) {
+			if (product[i].size === size || !product.size) {
+				this.setState({
+					selectedSize: size,
+					selectedStock: product[i].stock
+				});
+			}
 		}
 	}
 
@@ -83,8 +85,10 @@ class ProductPage extends Component {
 					</div>
 					<div className="col-6 product-details">
 						<div className="col-12 text-center">
-							<span className="product-title">{this.props.product.name}</span>
-							<p className="product-price">{this.props.product.price}</p>
+							<span className="product-title">
+								{this.props.product[0].name}
+							</span>
+							<p className="product-price">{this.props.product[0].price}</p>
 						</div>
 
 						<ProductSizes
@@ -94,7 +98,7 @@ class ProductPage extends Component {
 
 						<ProductButton
 							addCart={this.addCart.bind(this)}
-							product={this.props.product._id}
+							product={this.props.product}
 							stock={this.state.selectedStock}
 							size={this.state.selectedSize}
 						/>

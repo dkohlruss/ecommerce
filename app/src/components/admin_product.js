@@ -5,6 +5,11 @@ import { Link } from 'react-router-dom';
 import { fetchProduct, fetchUser } from '../actions';
 
 class AdminProduct extends Component {
+	constructor(props) {
+		super(props);
+		this.props.fetchProduct(this.props.match.params.page);
+	}
+
 	render() {
 		return null;
 	}

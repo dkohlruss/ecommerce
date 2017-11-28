@@ -3,7 +3,7 @@ export default function(state = null, action) {
 		case 'FETCH_USER':
 			return action.payload.data;
 		case 'USER_LOGIN':
-			return action.payload.data;
+			return action.payload;
 		case 'USER_REGISTER':
 			return action.payload.data;
 		case 'USER_LOGOUT':

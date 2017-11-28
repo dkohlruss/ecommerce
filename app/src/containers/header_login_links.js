@@ -24,7 +24,8 @@ class HeaderLogins extends Component {
 			modalIsOpen: false,
 			username: '',
 			password: '',
-			newUser: false
+			newUser: false,
+			loginMessage: ''
 		};
 
 		this.openModal = this.openModal.bind(this);
@@ -79,8 +80,22 @@ class HeaderLogins extends Component {
 	}
 
 	componentWillReceiveProps(newProps) {
-		if (newProps.user && this.state.user !== newProps.user.username) {
-			this.setState({ user: newProps.user.username });
+		console.log(newProps);
+		if (
+			newProps.login &&
+			newProps.login.data &&
+			newProps.login.data.success &&
+			this.state.user !== newProps.login.data.user.username
+		) {
+			this.setState({ user: newProps.login.data.user.username });
+		}
+
+		if (
+			newProps.login &&
+			newProps.login.response &&
+			!newProps.login.response.data.success
+		) {
+			this.setState({ loginMessage: newProps.login.response.data.message });
 		}
 	}
 
@@ -129,9 +144,19 @@ class HeaderLogins extends Component {
 	render() {
 		let loggedIn = this.getLoggedIn();
 		let notLoggedIn = this.notLoggedIn;
-		if (this.props.user && this.props.user.level !== 1) {
+		if (
+			this.props.login &&
+			this.props.login.data &&
+			this.props.login.data.success &&
+			this.props.login.data.user.level !== 1
+		) {
 			return loggedIn;
-		} else if (this.props.user && this.props.user.level === 1) {
+		} else if (
+			this.props.login &&
+			this.props.login.data &&
+			this.props.login.data.success &&
+			this.props.login.data.user.level === 1
+		) {
 			return loggedIn.concat(this.adminLoggedIn);
 		}
 
@@ -185,6 +210,7 @@ class HeaderLogins extends Component {
 						<button type="submit" className="btn btn-primary">
 							Submit
 						</button>
+						{this.state.loginMessage}
 					</form>
 				</Modal>
 			</span>
@@ -193,7 +219,7 @@ class HeaderLogins extends Component {
 }
 
 function mapStateToProps(state) {
-	return { user: state.user };
+	return { login: state.user };
 }
 
 export default connect(mapStateToProps, {

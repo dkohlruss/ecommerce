@@ -17,6 +17,7 @@ class CartPage extends Component {
 	}
 
 	componentWilLReceiveProps(newProps) {
+		console.log(newProps);
 		if (newProps.cart !== this.props.cart) {
 			this.setState({ cart: newProps.cart });
 		}

@@ -8,12 +8,14 @@ class ProductSizes extends Component {
 	}
 
 	getSizes() {
-		let sizes = this.props.products.sizes;
+		let sizes = this.props.products.map(product => {
+			return product.size;
+		});
 
 		return (
 			<select
 				name="size"
-				key={`size${this.props.products.name}`}
+				key={`size${this.props.products[0].name}`}
 				className="product-select product-size-select"
 				defaultValue="size"
 				onChange={event => {
@@ -41,6 +43,7 @@ class ProductSizes extends Component {
 	}
 
 	render() {
+		console.log(this.props);
 		let sizes = this.getSizes();
 		return <div className="col-12 text-center">{sizes}</div>;
 	}

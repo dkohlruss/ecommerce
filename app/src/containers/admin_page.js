@@ -42,12 +42,12 @@ class AdminPage extends Component {
 	}
 
 	render() {
-		console.log(this.props.user);
+		console.log(this.props);
 		return (
 			<div>
 				{this.props.products &&
 				this.props.user &&
-				this.props.user.level === 1 ? (
+				this.props.user.data.user.level === 1 ? (
 					<div className="col-10 cart-container">
 						<h2 className="text-center">Administration</h2>
 						<div className="row">
