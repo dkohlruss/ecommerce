@@ -51,7 +51,6 @@ UserSchema.statics.findByCreds = function(username, password, callback) {
 
 		(err, user) => {
 			if (err) {
-				console.log('db error', err);
 				callback(err);
 				return;
 			}
@@ -59,14 +58,12 @@ UserSchema.statics.findByCreds = function(username, password, callback) {
 			if (!user) {
 				const error = new Error('Incorrect username or password');
 				error.name = 'IncorrectCredentialsError';
-				console.log('creds error', error);
 				callback(error);
 				return;
 			}
 
 			bcrypt.compare(password, user.password, (err, result) => {
 				if (err) {
-					console.log('bcrypt err', err);
 					callback(err);
 					return;
 				}
@@ -74,7 +71,6 @@ UserSchema.statics.findByCreds = function(username, password, callback) {
 				if (!result) {
 					const error = new Error('Incorrect username or password');
 					error.name = 'IncorrectCredentialsError';
-					console.log('no result err', error);
 					callback(error);
 					return;
 				}
@@ -83,23 +79,6 @@ UserSchema.statics.findByCreds = function(username, password, callback) {
 			});
 		}
 	);
-	// }).then(user => {
-	// 	if (!user) {
-	// 		let err = new Error('Username was not found');
-	// 		return Promise.reject(err);
-	// 	}
-	//
-	// 	return new Promise((resolve, reject) => {
-	// 		bcrypt.compare(password, user.password, (err, result) => {
-	// 			if (result) {
-	// 				resolve(user);
-	// 			} else {
-	// 				console.log(err);
-	// 				reject(err);
-	// 			}
-	// 		});
-	// 	});
-	// });
 };
 
 UserSchema.pre('save', function(next) {

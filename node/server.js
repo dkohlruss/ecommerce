@@ -39,7 +39,7 @@ passport.deserializeUser(function(user, done) {
 });
 
 passport.use(
-	new LocalStrategy({ passReqToCallback: true }, function(
+	new LocalStrategy({ passReqToCallback: true, session: true }, function(
 		req,
 		username,
 		password,
@@ -107,7 +107,7 @@ app.delete('/user/cart', (req, res) => {
 	let product = _.pick(req.body, ['name', 'size']);
 	if (req.isAuthenticated()) {
 		User.findOne({ username: req.user.username }).then(result => {
-			cartDelete(product.name, result.cart);
+			cartDelete(product, result.cart);
 			result.save();
 			let cartArr = JSON.parse(JSON.stringify(result.cart));
 			let cart = makeCart({ cart: cartArr });
@@ -133,7 +133,6 @@ cartDelete = function(product, cart) {
 
 app.post('/user/cart', (req, res) => {
 	let product = _.pick(req.body.product, ['name', 'price', 'size']);
-
 	if (req.isAuthenticated()) {
 		User.findOneAndUpdate(
 			{ username: req.user.username },
@@ -165,7 +164,7 @@ app.post('/user/cart', (req, res) => {
 // USER PATHS FOR LOGIN/REGISTRATION
 
 app.post('/user/login/', (req, res, next) => {
-	return passport.authenticate('local', (err, user) => {
+	passport.authenticate('local', (err, user) => {
 		if (err) {
 			if (err.name === 'IncorrectCredentialsError') {
 				return res.status(400).json({
@@ -180,7 +179,17 @@ app.post('/user/login/', (req, res, next) => {
 			});
 		}
 
-		return res.json({
+		user.password = 'hidden';
+
+		req.login(user, err => {
+			if (err) {
+				return err;
+			}
+
+			return;
+		});
+
+		return res.send({
 			success: true,
 			message: 'Login successful',
 			user: user

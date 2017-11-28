@@ -15,7 +15,7 @@ const users = [
 	},
 	{
 		_id: new ObjectID(),
-		username: 'steve',
+		username: 'steven',
 		password: '821viin21v',
 		level: 1
 	}
@@ -23,21 +23,82 @@ const users = [
 
 const products = [
 	{
-		name: 'Seeded Product',
-		designer: 'Seed Designer',
-		category: 'Seed Category',
-		price: '55.99',
-		description: 'Seed Description',
-		stock: '5'
+		name: 'Shiny Boots',
+		designer: 'Fancy Pants',
+		category: 'Boots',
+		price: '155.99',
+		description: "It's unlike anything else you've ever experienced.",
+		size: '9',
+		stock: 3
 	},
 	{
-		name: 'Seeded Product 2',
-		designer: 'Seed Designer',
-		category: 'Seed Category',
-		price: '55.99',
-		description: 'Seed Description',
-		size: 'Large',
-		color: 'Black'
+		name: 'Shiny Boots',
+		designer: 'Fancy Pants',
+		category: 'Boots',
+		price: '155.99',
+		description: "It's unlike anything else you've ever experienced.",
+		size: '9',
+		stock: 1
+	},
+	{
+		name: 'Shiny Boots',
+		designer: 'Fancy Pants',
+		category: 'Boots',
+		price: '155.99',
+		description: "It's unlike anything else you've ever experienced.",
+		size: '9.5',
+		stock: 0
+	},
+	{
+		name: 'Shiny Boots',
+		designer: 'Fancy Pants',
+		category: 'Boots',
+		price: '155.99',
+		description: "It's unlike anything else you've ever experienced.",
+		size: '10',
+		stock: 5
+	},
+	{
+		name: 'Glittery Jeans',
+		designer: 'Afflection',
+		category: 'Bottoms',
+		price: '89.99',
+		description:
+			"They're endorsed by everybody who does MMA and could totally, definitely beat you up if they weren't so drunk.",
+		size: '32',
+		color: 'Shiny',
+		stock: 20
+	},
+	{
+		name: 'Glittery Jeans',
+		designer: 'Afflection',
+		category: 'Bottoms',
+		price: '89.99',
+		description:
+			"They're endorsed by everybody who does MMA and could totally, definitely beat you up if they weren't so drunk.",
+		size: '34',
+		color: 'Shiny',
+		stock: 20
+	},
+	{
+		name: 'Lives 105',
+		designer: 'Lives Jeans',
+		category: 'Bottoms',
+		price: '49.99',
+		description: "A cool classic fit that you can't wait to wear",
+		size: '32',
+		color: 'Blue',
+		stock: 3
+	},
+	{
+		name: 'Extra Glittery Jeans',
+		designer: 'Afflection',
+		category: 'Bottoms',
+		price: '189.99',
+		description: "Don't look directly into them, you might go blind",
+		size: '34',
+		color: 'Shiny',
+		stock: 20
 	}
 ];
 
@@ -58,6 +119,10 @@ const populateProducts = done => {
 		if (err) {
 			done(err);
 		}
+
+		products.forEach(product => {
+			let thing = new Product(product).save();
+		});
 
 		let productOne = new Product(products[0]).save();
 		let productTwo = new Product(products[1]).save();
