@@ -39,7 +39,6 @@ export function addCart(product) {
 }
 
 export function deleteCart(product) {
-	console.log(product);
 	const request = axios.delete(`http://localhost:3001/user/cart`, {
 		data: product
 	});

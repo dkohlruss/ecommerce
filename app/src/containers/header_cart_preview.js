@@ -34,7 +34,9 @@ class CartPreview extends Component {
 						</Link>
 					</span>
 				) : (
-					<span>EMPTY CART</span>
+					<Link to={'/main/cart'}>
+						<span>EMPTY CART</span>
+					</Link>
 				)}
 			</span>
 		);

@@ -3,19 +3,15 @@ import React, { Component } from 'react';
 class ProductSizes extends Component {
 	constructor(props) {
 		super(props);
-
-		this.sizes = this.getSizes();
 	}
 
 	getSizes() {
-		let sizes = this.props.products.map(product => {
-			return product.size;
-		});
+		let sizes = this.props.products.size;
 
 		return (
 			<select
 				name="size"
-				key={`size${this.props.products[0].name}`}
+				key={`size${this.props.products.name}`}
 				className="product-select product-size-select"
 				defaultValue="size"
 				onChange={event => {
@@ -25,7 +21,7 @@ class ProductSizes extends Component {
 				<option key="defaultSize" value="size" disabled>
 					Size
 				</option>
-				{!sizes ? (
+				{!sizes || !Array.isArray(sizes) ? (
 					<option key={'nosize'} value={'No Size'}>
 						No Size
 					</option>
@@ -43,9 +39,12 @@ class ProductSizes extends Component {
 	}
 
 	render() {
-		console.log(this.props);
-		let sizes = this.getSizes();
-		return <div className="col-12 text-center">{sizes}</div>;
+		if (this.props.products) {
+			let sizes = this.getSizes();
+			return <div className="col-12 text-center">{sizes}</div>;
+		} else {
+			return null;
+		}
 	}
 }
 

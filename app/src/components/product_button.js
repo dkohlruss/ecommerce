@@ -6,13 +6,16 @@ class ProductButton extends Component {
 	}
 
 	clickButton() {
-		let size = this.props.size;
-		this.props.product.map(item => {
-			if (item.size === size) {
-				return item;
-			}
-		});
-		this.props.addCart(this.props.product[0]);
+		// let size = this.props.size;
+		// let product = this.props.product.size.filter(item => {
+		// 	if (item.size === size) {
+		// 		return item;
+		// 	}
+		// });
+		let product = this.props.product;
+		product.size = this.props.size;
+
+		this.props.addCart(product);
 	}
 
 	createButton() {

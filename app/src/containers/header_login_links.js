@@ -11,7 +11,8 @@ const customStyles = {
 		right: 'auto',
 		bottom: 'auto',
 		marginRight: '-50%',
-		transform: 'translate(-50%, -50%)'
+		transform: 'translate(-50%, -50%)',
+		minWidth: '350px'
 	}
 };
 
@@ -207,10 +208,16 @@ class HeaderLogins extends Component {
 								onChange={this.handlePassChange}
 							/>
 						</div>
-						<button type="submit" className="btn btn-primary">
-							Submit
-						</button>
-						{this.state.loginMessage}
+						<div className="row">
+							<div className="col-4">
+								<button type="submit" className="btn btn-primary">
+									Submit
+								</button>
+							</div>
+							<div className="col-8 text-center">
+								<span className="cart-qty">{this.state.loginMessage}</span>
+							</div>
+						</div>
 					</form>
 				</Modal>
 			</span>

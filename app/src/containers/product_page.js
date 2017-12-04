@@ -14,22 +14,25 @@ class ProductPage extends Component {
 			selectedSize: null,
 			selectedStock: null
 		};
-	}
 
-	componentWillMount() {
 		let { productName } = this.props.match.params;
 		this.props.fetchProduct(productName);
 	}
+
+	// componentWillMount() {
+	// 	let { productName } = this.props.match.params;
+	// 	this.props.fetchProduct(productName);
+	// }
 
 	componentWillReceiveProps(nextProps) {
 		let oldName = this.props.match.params.productName;
 		let { productName } = nextProps.match.params;
 		if (oldName !== productName) {
+			this.props.fetchProduct(productName);
 			this.setState({
 				selectedSize: null,
 				selectedStock: null
 			});
-			this.props.fetchProduct(productName);
 		}
 	}
 
@@ -38,12 +41,12 @@ class ProductPage extends Component {
 	}
 
 	handleSizeChange(size) {
-		let product = this.props.product;
-		for (let i = 0; i < product.length; i++) {
-			if (product[i].size === size || !product.size) {
+		let sizes = this.props.product.size;
+		for (let i = 0; i < sizes.length; i++) {
+			if (size === sizes[i] || !sizes[1]) {
 				this.setState({
 					selectedSize: size,
-					selectedStock: product[i].stock
+					selectedStock: this.props.product.stock[i]
 				});
 			}
 		}
@@ -85,10 +88,8 @@ class ProductPage extends Component {
 					</div>
 					<div className="col-6 product-details">
 						<div className="col-12 text-center">
-							<span className="product-title">
-								{this.props.product[0].name}
-							</span>
-							<p className="product-price">{this.props.product[0].price}</p>
+							<span className="product-title">{this.props.product.name}</span>
+							<p className="product-price">{this.props.product.price}</p>
 						</div>
 
 						<ProductSizes
@@ -140,6 +141,7 @@ class ProductPage extends Component {
 }
 
 function mapStateToProps(state) {
+	console.log('redux state: ', state);
 	return {
 		product: state.product
 	};

@@ -7,9 +7,9 @@ const Footer = () => {
 		<footer className="container-fluid">
 			<div className="container">
 				<div className="row">
-					<div className="col-4">
+					<div className="col-4-md">
 						<div className="row">
-							<div className="col-6 footer-col">
+							<div className="col-6-md footer-col">
 								<span className="footer-title">CUSTOMER SERVICE</span>
 								<ul className="list-unstyled footer-links">
 									<li>ABOUT & CONTACT</li>
@@ -21,9 +21,9 @@ const Footer = () => {
 							</div>
 						</div>
 					</div>
-					<div className="col-4">
+					<div className="col-4-md">
 						<div className="row">
-							<div className="col-6 footer-col">
+							<div className="col-6-md footer-col">
 								<span className="footer-title">NEWSLETTER</span>
 								<p className="newsletter-blurb">
 									RECEIVE SPECIAL OFFERS AND BE THE FIRST TO KNOW WHEN NEW
@@ -48,9 +48,9 @@ const Footer = () => {
 							</div>
 						</div>
 					</div>
-					<div className="col-4">
+					<div className="col-4-md">
 						<div className="row">
-							<div className="col-6 footer-col">
+							<div className="col-6-md footer-col">
 								<span className="footer-title">CONNECT</span>
 								<ul className="list-inline footer-links">
 									<li className="list-inline-item footer-social-link">
