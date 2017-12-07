@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 import Radium, { StyleRoot } from 'radium';
@@ -42,6 +41,11 @@ class LandingPage extends Component {
 	componentWillReceiveProps(newProps) {
 		if (newProps !== this.props) {
 			this.slideNum = newProps.products.length;
+
+			this.names = [];
+			this.phrases = [];
+			this.images = [];
+			this.products = [];
 
 			newProps.products.forEach(product => {
 				this.names.push(product.designer);

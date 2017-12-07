@@ -32,7 +32,7 @@ class AdminPage extends Component {
 					{navObject[category].map(product => {
 						return (
 							<li className="admin-list-entries" key={product}>
-								<Link to={`/admin/${product}`}>{product}</Link>
+								<Link to={`/ecommerce/admin/${product}`}>{product}</Link>
 							</li>
 						);
 					})}
@@ -54,7 +54,7 @@ class AdminPage extends Component {
 						</div>
 						<div className="row">
 							<div className="col-lg-2">
-								<Link to={`/admin/new/newProduct`}>
+								<Link to={`/ecommerce/admin/new/newProduct`}>
 									<button className="btn btn-block button-add-to-bag">
 										New Product
 									</button>

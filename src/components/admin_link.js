@@ -8,7 +8,7 @@ class AdminLink extends Component {
 
 	render() {
 		return (
-			<Link to={'/admin'}>
+			<Link to={'/ecommerce/admin'}>
 				<span className="header-account-text" key="Admin">
 					ADMINISTRATION
 				</span>

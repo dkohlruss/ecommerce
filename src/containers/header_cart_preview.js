@@ -28,13 +28,13 @@ class CartPreview extends Component {
 			<span className="header-account-text header-account-link">
 				{this.state.cartCount > 0 ? (
 					<span>
-						<Link to={'/main/cart'}>
+						<Link to={'/ecommerce/main/cart'}>
 							YOUR CART:
 							<span className="cart-circle">{' ' + this.state.cartCount}</span>
 						</Link>
 					</span>
 				) : (
-					<Link to={'/main/cart'}>
+					<Link to={'/ecommerce/main/cart'}>
 						<span>EMPTY CART</span>
 					</Link>
 				)}

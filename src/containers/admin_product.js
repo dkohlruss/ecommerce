@@ -21,7 +21,7 @@ class AdminProduct extends Component {
 
 	formSubmit(values) {
 		this.props.submitEdit(values, () => {
-			this.props.history.push('/admin/');
+			this.props.history.push('/ecommerce/admin/');
 		});
 	}
 

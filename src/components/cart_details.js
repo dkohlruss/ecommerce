@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 
 const CartDetails = props => {
-	console.log(props);
 	if (props.cart.length > 0) {
 		return props.cart.map(item => {
 			return (

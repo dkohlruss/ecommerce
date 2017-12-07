@@ -53,7 +53,7 @@ class HeaderLogins extends Component {
 		];
 
 		this.adminLoggedIn = [
-			<Link to={'/admin'} key="Admin">
+			<Link to={'/ecommerce/admin'} key="Admin">
 				<span className="header-account-text header-account-link">
 					ADMINISTRATION
 				</span>

@@ -35,7 +35,9 @@ class Sidebar extends Component {
 					{navObject[category].map(product => {
 						return (
 							<li className="interior-nav-item" key={product}>
-								<Link to={`/main/products/product/${product}`}>{product}</Link>
+								<Link to={`/ecommerce/main/products/product/${product}`}>
+									{product}
+								</Link>
 							</li>
 						);
 					})}

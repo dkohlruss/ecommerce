@@ -46,11 +46,11 @@ class ProductsPage extends Component {
 						key={`${product._id}detail`}
 						className="col-lg-4 col-md-6 text-center product-mosaic-detail"
 					>
-						<Link to={`/main/products/product/${product._id}`}>
+						<Link to={`/ecommerce/main/products/product/${product._id}`}>
 							<img src="http://via.placeholder.com/200x200" alt="Placeholder" />
 							<br />
 							<span className="product-mosaic-title">{product._id}</span>
-						</Link>{' '}
+						</Link>
 						<br />
 						<span className="gold-dash">-</span>
 						<br />
