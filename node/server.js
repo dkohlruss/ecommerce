@@ -12,7 +12,7 @@ const { ObjectId } = require('mongodb');
 const { mongoose } = require('./db/mongoose');
 const { User } = require('./db/models/user');
 const { Product } = require('./db/models/product');
-const { makeCart } = require('./helpers');
+const { makeCart, splitAndMakeArray } = require('./helpers');
 
 const app = express();
 app.use(bodyParser.json());
@@ -79,6 +79,7 @@ app.get('/user/', (req, res) => {
 });
 
 app.get('/user/cart', (req, res) => {
+	console.log(req.isAuthenticated());
 	if (req.isAuthenticated()) {
 		let params = {
 			username: req.user.username
@@ -189,6 +190,10 @@ app.post('/user/login/', (req, res, next) => {
 			return;
 		});
 
+		let cart = makeCart(user);
+		user.cart = cart;
+		console.log(user);
+
 		return res.send({
 			success: true,
 			message: 'Login successful',
@@ -215,14 +220,33 @@ app.post('/user/register/', (req, res) => {
 	user
 		.save()
 		.then(() => {
-			res.send(user);
+			res.send({
+				data: {
+					success: true,
+					user: user
+				}
+			});
 		})
 		.catch(err => {
 			if (err.name === 'ValidationError') {
-				res.status(409).send();
+				return res.json({
+					response: {
+						data: {
+							success: false,
+							message: 'Passwords must be 6 characters or longer'
+						}
+					}
+				});
 			}
 
-			res.status(400).send();
+			return res.json({
+				response: {
+					data: {
+						success: false,
+						message: 'This username is taken'
+					}
+				}
+			});
 		});
 });
 
@@ -250,12 +274,8 @@ app.get('/api/random', (req, res) => {
 	// 	res.send(result);
 	// });
 	Product.find({
-		_id: {
-			$in: [
-				ObjectId('5a163e4bd841e822f95e1a02'),
-				ObjectId('5a163e4bd841e822f95e1a03'),
-				ObjectId('5a163e4bd841e822f95e1a05')
-			]
+		name: {
+			$in: ['Lives 105', 'Glittery Jeans']
 		}
 	}).then(result => {
 		res.send(result);
@@ -270,12 +290,32 @@ app.get('/api/product/:name', (req, res) => {
 		{
 			$match: params
 		}
-	]).then(result => {
-		res.send(result);
-	});
+	])
+		.then(result => {
+			let product = {
+				name: result[0].name,
+				designer: result[0].designer,
+				category: result[0].category,
+				price: result[0].price,
+				description: result[0].description,
+				size: result.map(product => {
+					return product.size;
+				}),
+				color: result[0].color,
+				stock: result.map(product => {
+					return product.stock;
+				})
+			};
+			console.log('Product result for fetch: ', product);
+
+			return product;
+		})
+		.then(product => {
+			res.send(product);
+		});
 });
 
-app.post('/api/new', (req, res) => {
+app.post('/api/products/new', (req, res) => {
 	// Adds a new item with parameters from form
 	// Should require user auth and admin status (TODO)
 	let body = _.pick(req.body, [
@@ -297,6 +337,23 @@ app.post('/api/new', (req, res) => {
 		.catch(err => {
 			res.status(400).send();
 		});
+});
+
+app.post('/api/products/edit', (req, res) => {
+	let products = splitAndMakeArray(req.body);
+
+	Product.deleteMany({ name: req.body.name }).then(result => {
+		// Timer set for .5s to avoid race conditions between queries
+		setTimeout(() => {
+			Product.insertMany(products)
+				.then(result => {
+					res.send(result);
+				})
+				.catch(err => {
+					res.send(err);
+				});
+		}, 500);
+	});
 });
 
 app.listen(3001, () => {

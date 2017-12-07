@@ -11,13 +11,13 @@ const users = [
 		_id: new ObjectID(),
 		username: 'dave123',
 		password: 'password1',
-		level: 0
+		level: 1
 	},
 	{
 		_id: new ObjectID(),
 		username: 'steven',
 		password: '821viin21v',
-		level: 1
+		level: 0
 	}
 ];
 
