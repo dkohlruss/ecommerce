@@ -4,8 +4,10 @@ export default function(state = null, action) {
 			return action.payload.data;
 		case 'USER_LOGIN':
 			return action.payload;
-		case 'USER_REGISTER':
+		case 'USER_REGISTER': {
+			console.log(action.payload);
 			return action.payload.data;
+		}
 		case 'USER_LOGOUT':
 			return null;
 		default:

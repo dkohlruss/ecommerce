@@ -20,24 +20,23 @@ class LandingPage extends Component {
 		super(props);
 
 		this.state = {
-			currentSlide: 0,
-			styles: {}
+			currentSlide: 0
 		};
 		this.names = [];
+		this.products = [];
 		this.phrases = [];
 		this.images = [];
 		this.carousel = '';
 
-		this.styles = {
-			fadeOutLeft: {
-				animation: '2s infinite',
-				animationName: Radium.keyframes(fadeOutLeft)
-			}
-		};
+		this.startCarousel.bind(this);
 	}
 
 	componentWillMount() {
 		this.props.fetchRandomProduct();
+	}
+
+	componentWillUnmount() {
+		clearInterval(this.carousel);
 	}
 
 	componentWillReceiveProps(newProps) {
@@ -48,6 +47,7 @@ class LandingPage extends Component {
 				this.names.push(product.designer);
 				this.phrases.push(product.description);
 				this.images.push(null);
+				this.products.push(product.name);
 			});
 
 			this.startCarousel(5000);
@@ -57,10 +57,6 @@ class LandingPage extends Component {
 	startCarousel(delay) {
 		let slide = this.state.currentSlide;
 		this.carousel = setInterval(() => {
-			// setTimeout(() => {
-			// 	this.setState({ styles: {} });
-			// 	this.setState({ styles: this.styles });
-			// }, 3000);
 			slide === this.names.length - 1 ? (slide = 0) : slide++;
 			this.setState({ currentSlide: slide });
 		}, delay);
@@ -87,7 +83,10 @@ class LandingPage extends Component {
 							slide={this.state.currentSlide}
 							phrases={this.phrases}
 						/>
-						<LandingMore slide={this.state.currentslide} names={this.names} />
+						<LandingMore
+							slide={this.state.currentSlide}
+							names={this.products}
+						/>
 						<LandingCounter
 							slide={this.state.currentSlide}
 							numbers={this.names}

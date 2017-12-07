@@ -12,7 +12,8 @@ import LandingPage from './containers/landing_page';
 import ProductPage from './containers/product_page';
 import ProductsPage from './containers/products_page';
 
-import AdminProduct from './components/admin_product';
+import AdminProduct from './containers/admin_product';
+import AdminProductNew from './containers/admin_product_new';
 
 import './css/index.css';
 
@@ -27,6 +28,11 @@ class App extends Component {
 					<Route path="/" component={Header} />
 					<div className="container">
 						<div className="row">
+							<Route
+								exact
+								path="/admin/new/newProduct"
+								component={AdminProductNew}
+							/>
 							<Route exact path="/admin/:page" component={AdminProduct} />
 							<Route exact path="/admin" component={AdminPage} />
 

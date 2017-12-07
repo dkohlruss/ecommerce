@@ -93,3 +93,39 @@ export function userRegister(params) {
 		payload: request
 	};
 }
+
+export function submitEdit(values, callback) {
+	const request = axios
+		.post(`http://localhost:3001/api/products/edit`, values)
+		.then(() => {
+			callback();
+		});
+
+	return {
+		type: 'EDIT_PRODUCT',
+		payload: request
+	};
+}
+
+export function submitNew(values, callback) {
+	// if (values.size) {
+	// 	values.size = values.size.split(',');
+	// }
+	//
+	// values.stock = values.stock.split(',');
+	//
+	// if (!values.size || (values.size.length !== values.stock.length)) {
+	//
+	// }
+
+	const request = axios
+		.post(`http://localhost:3001/api/products/new`, values)
+		.then(() => {
+			callback();
+		});
+
+	return {
+		type: 'EDIT_PRODUCT',
+		payload: request
+	};
+}

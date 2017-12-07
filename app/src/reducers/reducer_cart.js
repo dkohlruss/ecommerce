@@ -3,7 +3,7 @@ export default function(state = [], action) {
 		case 'FETCH_CART':
 			return action.payload.data;
 		case 'USER_LOGIN':
-			return action.payload.data.user.cart;
+			return [] || action.payload.data.user.cart;
 		case 'USER_LOGOUT':
 			return action.payload.data;
 		case 'ADD_CART':

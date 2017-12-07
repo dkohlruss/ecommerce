@@ -42,7 +42,6 @@ class AdminPage extends Component {
 	}
 
 	render() {
-		console.log(this.props);
 		return (
 			<div>
 				{this.props.products &&
@@ -55,9 +54,11 @@ class AdminPage extends Component {
 						</div>
 						<div className="row">
 							<div className="col-lg-2">
-								<button className="btn btn-block button-add-to-bag">
-									New Product
-								</button>
+								<Link to={`/admin/new/newProduct`}>
+									<button className="btn btn-block button-add-to-bag">
+										New Product
+									</button>
+								</Link>
 							</div>
 						</div>
 					</div>

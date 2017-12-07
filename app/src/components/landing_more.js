@@ -13,7 +13,9 @@ class LandingMore extends Component {
 					<div className="col-12 landing-more">
 						<span className="top-align">
 							<Link
-								to={`/products/product/${this.props.names[this.props.slide]}`}
+								to={`/main/products/product/${
+									this.props.names[this.props.slide]
+								}`}
 							>
 								- READ MORE -
 							</Link>
