@@ -16,6 +16,7 @@
 	},
 	"devDependencies": {
 		"chai": "^4.1.2",
+		"gh-pages": "^1.1.0",
 		"husky": "^0.14.3",
 		"lint-staged": "^5.0.0",
 		"mocha": "^4.0.1",
@@ -28,12 +29,15 @@
 		"build": "react-scripts build",
 		"test": "react-scripts test --env=jsdom",
 		"eject": "react-scripts eject",
-		"lint": "standard --fix"
+		"lint": "standard --fix",
+		"predeploy": "npm run build",
+		"deploy": "gh-pages -d build"
 	},
 	"lint-staged": {
 		"*.js": ["prettier --write", "standard --fix", "git add"]
 	},
 	"standard": {
 		"globals": ["fetch", "FormData", "it", "state", "URL"]
-	}
+	},
+	"homepage": "http://dkohlruss.github.io/ecommerce"
 }

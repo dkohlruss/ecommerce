@@ -3,7 +3,7 @@ import axios from 'axios';
 axios.defaults.withCredentials = true;
 
 export function fetchPosts() {
-	const request = axios.get('http://ecommerceback.herokuapp.com/api/');
+	const request = axios.get('https://ecommerceback.herokuapp.com/api/');
 
 	return {
 		type: 'FETCH_POSTS',
@@ -13,7 +13,7 @@ export function fetchPosts() {
 
 export function fetchProduct(name) {
 	const request = axios.get(
-		`http://ecommerceback.herokuapp.com/api/product/${name}`
+		`https://ecommerceback.herokuapp.com/api/product/${name}`
 	);
 
 	return {
@@ -23,7 +23,7 @@ export function fetchProduct(name) {
 }
 
 export function fetchRandomProduct() {
-	const request = axios.get(`http://ecommerceback.herokuapp.com/api/random`);
+	const request = axios.get(`https://ecommerceback.herokuapp.com/api/random`);
 
 	return {
 		type: 'FETCH_RANDOM',
@@ -32,7 +32,7 @@ export function fetchRandomProduct() {
 }
 
 export function addCart(product) {
-	const request = axios.post(`http://ecommerceback.herokuapp.com/user/cart`, {
+	const request = axios.post(`https://ecommerceback.herokuapp.com/user/cart`, {
 		product
 	});
 
@@ -43,9 +43,12 @@ export function addCart(product) {
 }
 
 export function deleteCart(product) {
-	const request = axios.delete(`http://ecommerceback.herokuapp.com/user/cart`, {
-		data: product
-	});
+	const request = axios.delete(
+		`https://ecommerceback.herokuapp.com/user/cart`,
+		{
+			data: product
+		}
+	);
 
 	return {
 		type: 'DELETE_CART',
@@ -54,7 +57,7 @@ export function deleteCart(product) {
 }
 
 export function fetchCart() {
-	const request = axios.get(`http://ecommerceback.herokuapp.com/user/cart/`);
+	const request = axios.get(`https://ecommerceback.herokuapp.com/user/cart/`);
 
 	return {
 		type: 'FETCH_CART',
@@ -63,7 +66,7 @@ export function fetchCart() {
 }
 
 export function fetchUser() {
-	const request = axios.get(`http://ecommerceback.herokuapp.com/user`);
+	const request = axios.get(`https://ecommerceback.herokuapp.com/user`);
 
 	return {
 		type: 'FETCH_USER',
@@ -73,7 +76,7 @@ export function fetchUser() {
 
 export function userLogin(params) {
 	const request = axios.post(
-		`http://ecommerceback.herokuapp.com/user/login`,
+		`https://ecommerceback.herokuapp.com/user/login`,
 		params
 	);
 
@@ -84,7 +87,7 @@ export function userLogin(params) {
 }
 
 export function userLogout() {
-	const request = axios.post(`http://ecommerceback.herokuapp.com/user/logout`);
+	const request = axios.post(`https://ecommerceback.herokuapp.com/user/logout`);
 
 	return {
 		type: 'USER_LOGOUT',
@@ -94,7 +97,7 @@ export function userLogout() {
 
 export function userRegister(params) {
 	const request = axios.post(
-		`http://ecommerceback.herokuapp.com/user/register`,
+		`https://ecommerceback.herokuapp.com/user/register`,
 		params
 	);
 
@@ -106,7 +109,7 @@ export function userRegister(params) {
 
 export function submitEdit(values, callback) {
 	const request = axios
-		.post(`http://ecommerceback.herokuapp.com/api/products/edit`, values)
+		.post(`https://ecommerceback.herokuapp.com/api/products/edit`, values)
 		.then(() => {
 			callback();
 		});
@@ -129,7 +132,7 @@ export function submitNew(values, callback) {
 	// }
 
 	const request = axios
-		.post(`http://ecommerceback.herokuapp.com/api/products/new`, values)
+		.post(`https://ecommerceback.herokuapp.com/api/products/new`, values)
 		.then(() => {
 			callback();
 		});
