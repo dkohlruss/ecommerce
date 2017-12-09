@@ -75,3 +75,13 @@ h1 {
 .heading {
 	height: 500px;
 }
+
+@media screen and (max-width: 767px) {
+	h1 {
+		font-size: 0.8em;
+	}
+
+	.landing-more {
+		font-size: 0.6em;
+	}
+}

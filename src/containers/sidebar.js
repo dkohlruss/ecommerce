@@ -48,7 +48,7 @@ class Sidebar extends Component {
 
 	render() {
 		return (
-			<div className="col-sm-2">
+			<div className="col-sm-2 sidebar">
 				{this.props.products ? this.renderNav() : <span>Loading..</span>}
 			</div>
 		);

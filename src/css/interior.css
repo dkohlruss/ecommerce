@@ -295,3 +295,29 @@ footer {
 .footer-social-link {
 	font-size: 1.5em;
 }
+
+.sidebar {
+	display: block;
+}
+
+@media screen and (max-width: 767px) {
+	.newsletter-blurb {
+		display: none;
+	}
+
+	.footer-title {
+		font-size: 0.5em;
+	}
+
+	.footer-blurb {
+		font-size: 0.5em;
+	}
+
+	.sidebar {
+		display: none;
+	}
+
+	.header-account-text {
+		font-size: 0.8em;
+	}
+}
