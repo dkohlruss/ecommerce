@@ -62,24 +62,24 @@ class ProductPage extends Component {
 						<div className="row">
 							<div className="col-12 product-image-display">
 								<img
-									src="http://www.chicago-soles.com/wp-content/uploads/London.jpg"
 									className="img-fluid rounded mx-auto d-block"
-									alt="Responsive image"
+									src="http://lorempixel.com/320/400"
+									alt="Placeholder"
 								/>
 							</div>
-							<div className="col-12 product-image-chooser text-center">
+							<div className="col-12-sm product-image-chooser text-center">
 								<img
-									src="http://via.placeholder.com/100x100"
+									src="http://lorempixel.com/100/100"
 									className="img-thumbnail rounded mx-auto"
 									alt="Responsive"
 								/>
 								<img
-									src="http://via.placeholder.com/100x100"
+									src="http://lorempixel.com/100/100"
 									className="img-thumbnail rounded mx-auto"
 									alt="Responsive"
 								/>
 								<img
-									src="http://via.placeholder.com/100x100"
+									src="http://lorempixel.com/100/100"
 									className="img-thumbnail rounded mx-auto"
 									alt="Responsive"
 								/>
