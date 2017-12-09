@@ -320,4 +320,12 @@ footer {
 	.header-account-text {
 		font-size: 0.8em;
 	}
+
+	.input-email {
+		width: 100px;
+	}
+
+	.button-email {
+		width: 25px;
+	}
 }
