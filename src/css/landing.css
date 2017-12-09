@@ -78,7 +78,7 @@ h1 {
 
 @media screen and (max-width: 767px) {
 	h1 {
-		font-size: 0.8em;
+		font-size: 1.2em;
 	}
 
 	.landing-more {
