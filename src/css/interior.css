@@ -190,6 +190,9 @@ footer {
 .product-image-chooser {
 	min-height: 100px;
 	padding: 10px;
+	width: 100%;
+	display: flex;
+	justify-content: space-between;
 }
 
 .product-info {
