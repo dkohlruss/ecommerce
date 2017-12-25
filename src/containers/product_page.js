@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
 import { addCart, fetchProduct } from '../actions';
 
 import ProductSizes from '../components/product_sizes';
@@ -58,6 +57,8 @@ class ProductPage extends Component {
 		) : (
 			<div className="col-sm-10 product-info">
 				<div className="row">
+
+
 					<div className="col-6 product-image">
 						<div className="row">
 							<div className="col-12 product-image-display">
@@ -86,6 +87,8 @@ class ProductPage extends Component {
 							</div>
 						</div>
 					</div>
+
+
 					<div className="col-6 product-details">
 						<div className="col-12 text-center">
 							<span className="product-title">{this.props.product.name}</span>

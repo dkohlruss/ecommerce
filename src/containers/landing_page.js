@@ -1,9 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import Radium, { StyleRoot } from 'radium';
-import { fadeOutLeft } from 'react-animations';
-
 import LandingHeader from '../components/landing_header';
 import LandingPhrase from '../components/landing_phrase';
 import LandingMore from '../components/landing_more';

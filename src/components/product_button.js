@@ -1,12 +1,8 @@
 import React, { Component } from 'react';
 
 class ProductButton extends Component {
-	constructor(props) {
-		super(props);
-	}
 
 	clickButton() {
-		let sizes = this.props.product.size;
 		let product = {};
 		product.name = this.props.product.name;
 		product.size = this.props.size;

@@ -1,10 +1,6 @@
 import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
 
 class LandingHeader extends Component {
-	constructor(props) {
-		super(props);
-	}
 
 	componentWillReceiveProps(newProps) {
 		if (newProps.slide !== this.props.slide) {
