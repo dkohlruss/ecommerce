@@ -57,8 +57,6 @@ class ProductPage extends Component {
 		) : (
 			<div className="col-sm-10 product-info">
 				<div className="row">
-
-
 					<div className="col-6 product-image">
 						<div className="row">
 							<div className="col-12 product-image-display">
@@ -87,7 +85,6 @@ class ProductPage extends Component {
 							</div>
 						</div>
 					</div>
-
 
 					<div className="col-6 product-details">
 						<div className="col-12 text-center">
@@ -144,7 +141,6 @@ class ProductPage extends Component {
 }
 
 function mapStateToProps(state) {
-	console.log('redux state: ', state);
 	return {
 		product: state.product
 	};

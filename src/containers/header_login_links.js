@@ -81,7 +81,6 @@ class HeaderLogins extends Component {
 	}
 
 	componentWillReceiveProps(newProps) {
-		console.log(newProps);
 		if (
 			newProps.login &&
 			newProps.login.data &&
