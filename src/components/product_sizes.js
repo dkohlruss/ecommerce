@@ -1,9 +1,6 @@
 import React, { Component } from 'react';
 
 class ProductSizes extends Component {
-	constructor(props) {
-		super(props);
-	}
 
 	getSizes() {
 		let sizes = this.props.products.size;

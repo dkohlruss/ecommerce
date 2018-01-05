@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 
 const CartDetails = props => {
 	if (props.cart.length > 0) {

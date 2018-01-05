@@ -58,6 +58,8 @@ class ProductsPage extends Component {
 					</div>
 				);
 			}
+
+			return <div />;
 		});
 	}
 

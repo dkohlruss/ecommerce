@@ -34,10 +34,20 @@
 		"deploy": "gh-pages -d build"
 	},
 	"lint-staged": {
-		"*.js": ["prettier --write", "standard --fix", "git add"]
+		"*.js": [
+			"prettier --write",
+			"standard --fix",
+			"git add"
+		]
 	},
 	"standard": {
-		"globals": ["fetch", "FormData", "it", "state", "URL"]
+		"globals": [
+			"fetch",
+			"FormData",
+			"it",
+			"state",
+			"URL"
+		]
 	},
 	"homepage": "http://dkohlruss.github.io/ecommerce"
 }

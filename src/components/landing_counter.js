@@ -1,9 +1,6 @@
 import React, { Component } from 'react';
 
 class LandingCounter extends Component {
-	constructor(props) {
-		super(props);
-	}
 
 	getNumbers() {
 		let numbers = [];
