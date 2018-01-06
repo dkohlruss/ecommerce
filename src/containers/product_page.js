@@ -4,6 +4,7 @@ import { addCart, fetchProduct } from '../actions';
 
 import ProductSizes from '../components/product_sizes';
 import ProductButton from '../components/product_button';
+import PhotoChooser from '../components/product_images';
 
 class ProductPage extends Component {
 	constructor(props) {
