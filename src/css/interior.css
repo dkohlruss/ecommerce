@@ -184,7 +184,12 @@ footer {
 }
 
 .product-image-display {
-	max-height: 400px;
+	height: 400px;
+}
+
+.product-image-feature {
+	height: 400px;
+	width: 320px;
 }
 
 .product-image-chooser {

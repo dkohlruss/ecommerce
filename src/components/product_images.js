@@ -4,7 +4,7 @@ class PhotoChooser extends Component {
 	constructor(props) {
 		super(props);
 
-		this.state = { displayedImage: '' };
+		this.state = { displayedImage: this.props.images[0] };
 		this.chooseImage.bind(this);
 	}
 
@@ -25,7 +25,7 @@ class PhotoChooser extends Component {
 			<div className="row">
 				<div className="col-12 product-image-display">
 					<img
-						className="img-fluid rounded mx-auto d-block"
+						className="img-fluid rounded mx-auto d-block product-image-feature"
 						src={this.state.displayedImage}
 						width="320"
 						height="400"
