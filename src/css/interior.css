@@ -189,6 +189,7 @@ footer {
 
 .product-image-chooser {
 	min-height: 100px;
+	max-height: 120px;
 	padding: 10px;
 	width: 100%;
 	display: flex;
