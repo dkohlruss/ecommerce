@@ -8,17 +8,12 @@ class PhotoChooser extends Component {
 		this.chooseImage = this.chooseImage.bind(this);
 	}
 
-	componentWillReceiveProps(newProps) {
-		if (this.state.displayedImage !== newProps.images[0]) {
-			this.setState({ displayedImage: newProps.images[0] });
-		}
-	}
-
 	chooseImage(newImage) {
 		this.setState({ displayedImage: newImage });
 	}
 
 	render() {
+		console.log(this.props);
 		return !this.props.images ? (
 			<div />
 		) : (
