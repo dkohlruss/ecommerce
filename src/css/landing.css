@@ -61,10 +61,6 @@ h1 {
 
 .landing-right {
 	background: url('https://i.pinimg.com/736x/01/0e/83/010e834c59ee3d7e6afa806e47a1c189--fashion-makeup-photography-fashion-portraits.jpg');
-	-webkit-background-size: contain;
-	-moz-background-size: contain;
-	-o-background-size: contain;
-	background-size: contain;
 	background-repeat: no-repeat;
 }
 
