@@ -5,7 +5,7 @@ class PhotoChooser extends Component {
 		super(props);
 
 		this.state = { displayedImage: '' };
-		this.chooseImage = this.chooseImage.bind(this);
+		this.chooseImage.bind(this);
 	}
 
 	chooseImage(newImage) {
@@ -30,7 +30,7 @@ class PhotoChooser extends Component {
 				<div className="col-12-sm product-image-chooser text-center">
 					<img
 						src={this.props.images[0]}
-						onClick={this.chooseImage(this.props.images[0])}
+						onClick={() => this.chooseImage(this.props.images[0])}
 						height="100"
 						width="100"
 						className="img-thumbnail rounded mx-auto"
@@ -38,7 +38,7 @@ class PhotoChooser extends Component {
 					/>
 					<img
 						src={this.props.images[1]}
-						onClick={this.chooseImage(this.props.images[1])}
+						onClick={() => this.chooseImage(this.props.images[1])}
 						height="100"
 						width="100"
 						className="img-thumbnail rounded mx-auto"
@@ -46,7 +46,7 @@ class PhotoChooser extends Component {
 					/>
 					<img
 						src={this.props.images[2]}
-						onClick={this.chooseImage(this.props.images[2])}
+						onClick={() => this.chooseImage(this.props.images[2])}
 						height="100"
 						width="100"
 						className="img-thumbnail rounded mx-auto"
