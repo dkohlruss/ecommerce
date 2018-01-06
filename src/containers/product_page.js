@@ -62,7 +62,7 @@ class ProductPage extends Component {
 							<div className="col-12 product-image-display">
 								<img
 									className="img-fluid rounded mx-auto d-block"
-									src=`"${this.props.product.images[0]}"`
+									src={this.props.product.images[0]}
 									width=320
 									height=400
 									alt="Placeholder"
@@ -70,23 +70,23 @@ class ProductPage extends Component {
 							</div>
 							<div className="col-12-sm product-image-chooser text-center">
 								<img
-									src=`"${this.props.product.images[1]}"`
+									src={this.props.product.images[1]}
 									width=100
 									height=100
 									className="img-thumbnail rounded mx-auto"
 									alt="Responsive"
 								/>
 								<img
-									src=`"${this.props.product.images[2]}"`
+									src={this.props.product.images[2]}
 									width=100
 									height=100
 									className="img-thumbnail rounded mx-auto"
 									alt="Responsive"
 								/>
 								<img
-									src=`"${this.props.product.images[3]}"`
+									src={this.props.product.images[3]}
 									width=100
-									height=100 
+									height=100
 									className="img-thumbnail rounded mx-auto"
 									alt="Responsive"
 								/>
