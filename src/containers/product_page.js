@@ -55,7 +55,6 @@ class ProductPage extends Component {
 		return !this.props.product ? (
 			<span />
 		) : (
-			console.log(this.props.product);
 			<div className="col-sm-10 product-info">
 				<div className="row">
 					<div className="col-6 product-image">
