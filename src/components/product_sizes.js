@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 
 class ProductSizes extends Component {
-
 	getSizes() {
 		let sizes = this.props.products.size;
 
@@ -18,7 +17,7 @@ class ProductSizes extends Component {
 				<option key="defaultSize" value="size" disabled>
 					Size
 				</option>
-				{!sizes || !Array.isArray(sizes) ? (
+				{!sizes || !Array.isArray(sizes) || sizes.length < 1 || !sizes[0] ? (
 					<option key={'nosize'} value={'No Size'}>
 						No Size
 					</option>
