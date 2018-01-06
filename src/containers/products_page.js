@@ -47,7 +47,12 @@ class ProductsPage extends Component {
 						className="col-lg-4 col-md-6 text-center product-mosaic-detail"
 					>
 						<Link to={`/ecommerce/main/products/product/${product._id}`}>
-							<img src={product.images[0]} alt="Product Preview" />
+							<img
+								src={product.images[0]}
+								height="200"
+								width="200"
+								alt="Product Preview"
+							/>
 							<br />
 							<span className="product-mosaic-title">{product._id}</span>
 						</Link>
