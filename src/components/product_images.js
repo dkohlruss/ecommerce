@@ -15,7 +15,7 @@ class PhotoChooser extends Component {
 	}
 
 	chooseImage(newImage) {
-		this.setState((displayedImage: newImage));
+		this.setState({ displayedImage: newImage });
 	}
 
 	render() {
