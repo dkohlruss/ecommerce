@@ -55,6 +55,7 @@ class ProductPage extends Component {
 		return !this.props.product ? (
 			<span />
 		) : (
+			console.log(this.props.product);
 			<div className="col-sm-10 product-info">
 				<div className="row">
 					<div className="col-6 product-image">
@@ -71,22 +72,22 @@ class ProductPage extends Component {
 							<div className="col-12-sm product-image-chooser text-center">
 								<img
 									src={this.props.product.images[1]}
-									width="100"
 									height="100"
+									width="100"
 									className="img-thumbnail rounded mx-auto"
 									alt="Responsive"
 								/>
 								<img
 									src={this.props.product.images[2]}
-									width="100"
 									height="100"
+									width="100"
 									className="img-thumbnail rounded mx-auto"
 									alt="Responsive"
 								/>
 								<img
 									src={this.props.product.images[3]}
-									width="100"
 									height="100"
+									width="100"
 									className="img-thumbnail rounded mx-auto"
 									alt="Responsive"
 								/>

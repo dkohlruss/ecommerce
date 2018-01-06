@@ -199,6 +199,13 @@ footer {
 	min-height: 500px;
 }
 
+.img-thumbnail {
+	max-height: 100px;
+	max-width: 100px;
+	height: 100px;
+	width: 100px;
+}
+
 .product-select {
 	position: relative;
 	min-width: 100px;
