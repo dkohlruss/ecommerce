@@ -5,6 +5,11 @@ import { fetchCart, deleteCart } from '../actions';
 
 import CartDetails from '../components/cart_details';
 
+/*
+	props from redux:
+		fetchCart(): Grabs user cart data
+		deleteCart(item): Removes 1 of the selected item from user cart
+*/
 class CartPage extends Component {
 	constructor(props) {
 		super(props);

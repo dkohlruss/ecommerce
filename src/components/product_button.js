@@ -1,7 +1,12 @@
 import React, { Component } from 'react';
 
+/*
+	props:
+		product: A product object containing name, price, fetchCart
+		size: The size of the current selected product
+		stock: The number of a product available
+*/
 class ProductButton extends Component {
-
 	clickButton() {
 		let product = {};
 		product.name = this.props.product.name;
@@ -10,6 +15,8 @@ class ProductButton extends Component {
 		this.props.addCart(product);
 	}
 
+	// Returns a button JSX element with different properties depending on whether or not
+	// a product is available and if a product size has been selected
 	createButton() {
 		if (this.props.stock > 0) {
 			return (

@@ -2,8 +2,15 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
-import { addCart, fetchCart } from '../actions';
+import { fetchCart } from '../actions';
 
+/* Component to display the cart preview/link in the page header
+	props from redux:
+		fetchCart(): Grabs user (or session) cart data
+
+	state:
+		cartCount: Current number of items held within cart
+*/
 class CartPreview extends Component {
 	constructor(props) {
 		super(props);
@@ -47,4 +54,4 @@ function mapStateToProps(state) {
 	return { cart: state.cart };
 }
 
-export default connect(mapStateToProps, { addCart, fetchCart })(CartPreview);
+export default connect(mapStateToProps, { fetchCart })(CartPreview);

@@ -1,8 +1,12 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 
+/*
+	props:
+		names: Array of names of each product
+		slide: The current slide being displayed
+*/
 class LandingMore extends Component {
-
 	render() {
 		if (this.props.names) {
 			return (

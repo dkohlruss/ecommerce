@@ -16,6 +16,12 @@ const customStyles = {
 	}
 };
 
+/*
+	This component contains the links for user login/registration, as well as the modal for user login/registration.
+	props from redux:
+		login: user login data
+		fetchUser(): fetches user data
+*/
 class HeaderLogins extends Component {
 	constructor(props) {
 		super(props);
@@ -76,6 +82,7 @@ class HeaderLogins extends Component {
 		this.setState({ modalIsOpen: false });
 	}
 
+	// Gets user data when component initially mounts
 	componentWillMount() {
 		this.props.fetchUser();
 	}
@@ -121,6 +128,7 @@ class HeaderLogins extends Component {
 		}
 	}
 
+	// Message to be displayed if user has successfully logged in
 	getLoggedIn() {
 		return [
 			<span className="header-account-text" key="LoggedIn">

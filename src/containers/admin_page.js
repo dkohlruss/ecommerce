@@ -3,6 +3,11 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { fetchPosts, fetchUser } from '../actions';
 
+/*
+	props from redux:
+		user: User data object
+		products: Products data object
+*/
 class AdminPage extends Component {
 	componentWillMount() {
 		this.props.fetchPosts();
@@ -41,6 +46,7 @@ class AdminPage extends Component {
 		});
 	}
 
+	// Renders the view only if products & user data is loaded and user level is 1 (admin)
 	render() {
 		return (
 			<div>

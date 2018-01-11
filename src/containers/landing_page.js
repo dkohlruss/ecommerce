@@ -11,6 +11,11 @@ import { fetchRandomProduct } from '../actions';
 
 import '../css/landing.css';
 
+/*
+	props from redux:
+		fetchRandomProduct(): In this instance, it fetches 3 specific products... Returns data to be passed into child components
+		products: Array of products returned from fetchRandomProduct()
+*/
 class LandingPage extends Component {
 	constructor(props) {
 		super(props);
@@ -31,6 +36,8 @@ class LandingPage extends Component {
 		this.props.fetchRandomProduct();
 	}
 
+	// Prevents this component from attempting to update after it has been unmounted,
+	// usually due to the user clicking a link to another page
 	componentWillUnmount() {
 		clearInterval(this.carousel);
 	}
@@ -63,6 +70,8 @@ class LandingPage extends Component {
 		}, delay);
 	}
 
+	// Prevents the next carousel event from firing, changes to the clicked slide,
+	// and then begins a new carousel timer.
 	changeCarousel(event) {
 		let currentSlide = event.target.innerHTML - 1;
 		clearInterval(this.carousel);

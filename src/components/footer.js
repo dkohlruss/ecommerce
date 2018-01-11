@@ -2,6 +2,7 @@ import React from 'react';
 
 import '../css/interior.css';
 
+// Static footer of webpage
 const Footer = () => {
 	return (
 		<footer className="container-fluid">

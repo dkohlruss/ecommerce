@@ -6,6 +6,9 @@ import HeaderLogins from '../containers/header_login_links';
 
 import '../css/interior.css';
 
+/*
+	Header, displaying login links and a preview of user cart
+*/
 class Header extends Component {
 	render() {
 		return (

@@ -1,5 +1,9 @@
 import React, { Component } from 'react';
 
+/*
+	props:
+		images: Array of URLs to images of a product hosted on external CDN
+*/
 class PhotoChooser extends Component {
 	constructor(props) {
 		super(props);

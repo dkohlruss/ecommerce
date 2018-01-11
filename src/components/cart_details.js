@@ -1,5 +1,8 @@
 import React from 'react';
 
+/*props: 
+		cart: Array of objects containing a name, size, and quantity property
+*/
 const CartDetails = props => {
 	if (props.cart.length > 0) {
 		return props.cart.map(item => {

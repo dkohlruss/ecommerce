@@ -1,11 +1,8 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 
+// This renders only if a user logs in with admin permissions
 class AdminLink extends Component {
-	constructor(props) {
-		super(props);
-	}
-
 	render() {
 		return (
 			<Link to={'/ecommerce/admin'}>
